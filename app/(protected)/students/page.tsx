@@ -63,11 +63,11 @@ export default function StudentsPage() {
       flex: 1.4,
       valueGetter: (_, row) => [row.firstName, row.paternalName, row.maternalName].filter(Boolean).join(" "),
       renderCell: (params) => (
-        <Box>
-          <Typography variant="body2" sx={{ fontWeight: 600 }}>
+        <Box sx={{ overflow: "hidden", minWidth: 0 }}>
+          <Typography variant="body2" noWrap sx={{ fontWeight: 600, lineHeight: 1.3 }}>
             {params.row.firstName}
           </Typography>
-          <Typography variant="caption" color="text.secondary">
+          <Typography variant="caption" color="text.secondary" noWrap sx={{ display: "block", lineHeight: 1.3 }}>
             {[params.row.paternalName, params.row.maternalName].filter(Boolean).join(" ")}
           </Typography>
         </Box>
