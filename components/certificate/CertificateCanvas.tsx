@@ -36,9 +36,9 @@ function SignatureSkeleton({ roleLabel }: { roleLabel: string }) {
   return (
     <Box sx={{ textAlign: "center" }}>
       <Skeleton variant="text" width="85%" height={9} sx={{ mx: "auto" }} />
-      <Divider sx={{ my: 1.25 }} />
+      <Divider sx={{ my: 2.25 }} />
       <Skeleton variant="text" width="65%" height={9} sx={{ mx: "auto" }} />
-      <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 0.25, fontSize: 9 }}>
+      <Typography variant="caption" color="text.secondary" sx={{ display: "block", mt: 0.5, fontSize: 9 }}>
         {roleLabel} — en Firmantes
       </Typography>
     </Box>
@@ -223,7 +223,7 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
             value={field("LEGAL_1")}
             onClick={() => onEditField("LEGAL_1")}
             variant="block"
-            minHeight={56}
+            minHeight={84}
           />
 
           <EditableFieldBox
@@ -231,7 +231,7 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
             value={field("LEGAL_2")}
             onClick={() => onEditField("LEGAL_2")}
             variant="block"
-            minHeight={56}
+            minHeight={84}
           />
 
           <SignatureSkeleton roleLabel="Subsecretario" />
