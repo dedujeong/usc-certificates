@@ -43,6 +43,15 @@ const FONT_FAMILY: Record<FontKey, string> = {
   sofiaBold: "CertSofiaBold",
 };
 
+// Admin-configurable per-paragraph typography (LEGAL_1/LEGAL_2) is stored as
+// a free-form string in the DB — validated against this set at save time
+// (lib/validators/certificateField.schema.ts), but re-checked here too so a
+// stale/unexpected value never produces an invalid `font-family` CSS value.
+const LEGAL_FONT_KEYS: FontKey[] = ["arial", "arialNarrow", "timesNewRoman"];
+function resolveLegalFont(key: string | null): string {
+  return FONT_FAMILY[(LEGAL_FONT_KEYS as string[]).includes(key ?? "") ? (key as FontKey) : "arial"];
+}
+
 interface TextOpts {
   font?: FontKey;
   bold?: boolean;
@@ -341,9 +350,9 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     ${textEl(data.people[5].charge, 27, 312, 9)}
     ${textEl(data.people[5].name, 12, 320, 8, { font: "timesNewRoman", align: "center", width: 56 })}
 
-    <div id="legal-paragraphs" style="position:absolute; left:110mm; top:235mm; width:95mm; font-family:'${FONT_FAMILY.arial}'; font-size:10pt;">
-      <p style="margin:0 0 4.5mm 0; text-align:justify; hyphens:auto;">${markupToHtml(data.legal1)}</p>
-      <p style="margin:0; text-align:justify; hyphens:auto;">${markupToHtml(data.legal2)}</p>
+    <div id="legal-paragraphs" style="position:absolute; left:110mm; top:235mm; width:95mm; font-size:10pt;">
+      <p style="margin:0 0 4.5mm 0; text-align:justify; hyphens:auto; font-family:'${resolveLegalFont(data.legal1FontFamily)}';${data.legal1LineHeight ? ` line-height:${data.legal1LineHeight};` : ""}">${markupToHtml(data.legal1)}</p>
+      <p style="margin:0; text-align:justify; hyphens:auto; font-family:'${resolveLegalFont(data.legal2FontFamily)}';${data.legal2LineHeight ? ` line-height:${data.legal2LineHeight};` : ""}">${markupToHtml(data.legal2)}</p>
     </div>
 
     <div id="closing-signatures" style="position:absolute; left:110mm; top:285mm; width:95mm; font-family:'${FONT_FAMILY.timesNewRoman}'; font-size:10pt;">

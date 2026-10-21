@@ -1,7 +1,17 @@
 "use client";
 
 import { useRef, useState, useEffect, Fragment } from "react";
-import { Box, Button, Menu, MenuItem, Paper, ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  Paper,
+  TextField,
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import DataObjectIcon from "@mui/icons-material/DataObject";
@@ -15,10 +25,35 @@ export interface LegalTextPlaceholder {
   example: string;
 }
 
+/** Matches certificate/html/template.ts's LEGAL_FONT_KEYS. */
+const LEGAL_FONT_OPTIONS: { value: string; label: string }[] = [
+  { value: "arial", label: "Arial" },
+  { value: "arialNarrow", label: "Arial condensada" },
+  { value: "timesNewRoman", label: "Times New Roman" },
+];
+
+// Browser-available approximation for the preview below — the actual PDF
+// uses the embedded TTFs (certificate/html/assets.ts), which aren't loaded
+// into this admin page.
+const PREVIEW_FONT_STACK: Record<string, string> = {
+  arial: "Arial, sans-serif",
+  arialNarrow: '"Arial Narrow", Arial, sans-serif',
+  timesNewRoman: '"Times New Roman", Times, serif',
+};
+
+export interface LegalTextTypography {
+  fontFamily: string | null;
+  lineHeight: number | null;
+}
+
 interface LegalTextFieldProps {
   value: string;
   onChange: (value: string) => void;
   placeholders?: LegalTextPlaceholder[];
+  /** When set, shows font-family/line-height controls for this paragraph
+   *  (only LEGAL_1/LEGAL_2 support a per-paragraph override today). */
+  typography?: LegalTextTypography;
+  onTypographyChange?: (typography: LegalTextTypography) => void;
 }
 
 /**
@@ -30,7 +65,13 @@ interface LegalTextFieldProps {
  * at the cursor — producing the exact same underlying string, just without
  * requiring staff to know the syntax.
  */
-export default function LegalTextField({ value, onChange, placeholders }: LegalTextFieldProps) {
+export default function LegalTextField({
+  value,
+  onChange,
+  placeholders,
+  typography,
+  onTypographyChange,
+}: LegalTextFieldProps) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [pendingSelection, setPendingSelection] = useState<[number, number] | null>(null);
   const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null);
@@ -67,7 +108,7 @@ export default function LegalTextField({ value, onChange, placeholders }: LegalT
 
   return (
     <Box>
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1.5, mt: 2, flexWrap: "wrap" }}>
         <ToggleButtonGroup size="small">
           <ToggleButton value="bold" onClick={() => wrapSelection("*")} title="Negrita">
             <FormatBoldIcon fontSize="small" />
@@ -94,6 +135,40 @@ export default function LegalTextField({ value, onChange, placeholders }: LegalT
                 </MenuItem>
               ))}
             </Menu>
+          </>
+        )}
+
+        {typography && onTypographyChange && (
+          <>
+            <TextField
+              select
+              size="small"
+              label="Tipografía"
+              value={typography.fontFamily ?? "arial"}
+              onChange={(e) => onTypographyChange({ ...typography, fontFamily: e.target.value })}
+              sx={{ minWidth: 190 }}
+            >
+              {LEGAL_FONT_OPTIONS.map((opt) => (
+                <MenuItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              size="small"
+              type="number"
+              label="Interlineado"
+              value={typography.lineHeight ?? ""}
+              onChange={(e) =>
+                onTypographyChange({
+                  ...typography,
+                  lineHeight: e.target.value === "" ? null : Number(e.target.value),
+                })
+              }
+              placeholder="Automático"
+              inputProps={{ step: 0.05, min: 1, max: 3 }}
+              sx={{ width: 140 }}
+            />
           </>
         )}
       </Box>
@@ -135,7 +210,15 @@ export default function LegalTextField({ value, onChange, placeholders }: LegalT
         <Typography variant="caption" color="text.secondary" sx={{ display: "block", mb: 0.5 }}>
           Vista previa
         </Typography>
-        <Typography variant="body2" sx={{ whiteSpace: "pre-wrap" }}>
+        <Typography
+          variant="body2"
+          sx={{
+            whiteSpace: "pre-wrap",
+            textAlign: "justify",
+            fontFamily: typography ? PREVIEW_FONT_STACK[typography.fontFamily ?? "arial"] : undefined,
+            lineHeight: typography?.lineHeight ?? undefined,
+          }}
+        >
           <LegalTextPreview text={value} placeholders={placeholders} />
         </Typography>
       </Paper>

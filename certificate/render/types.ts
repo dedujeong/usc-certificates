@@ -33,6 +33,12 @@ export interface CertificateData {
   legalTop: string;
   legal1: string;
   legal2: string;
+  /** Per-paragraph typography override for LEGAL_1/LEGAL_2 (admin-configurable
+   *  via /certificate-fields); null falls back to the template default. */
+  legal1FontFamily: string | null;
+  legal1LineHeight: number | null;
+  legal2FontFamily: string | null;
+  legal2LineHeight: number | null;
 
   studentId: number;
   studentName: string;

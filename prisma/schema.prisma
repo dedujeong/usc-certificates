@@ -99,6 +99,12 @@ model CertificateField {
   name  String @unique
   value String
 
+  // Only used by LEGAL_1/LEGAL_2 today — lets an admin override the
+  // certificate's default typography (CertArial, browser-default line
+  // height) per legal paragraph. Null means "use the template default".
+  fontFamily String?
+  lineHeight Float?
+
   @@map("certificate_fields")
 }
 

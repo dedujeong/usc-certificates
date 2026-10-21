@@ -6,10 +6,21 @@ import { z } from "zod";
 // lowercase placeholder tokens stop matching at substitution time.
 const PRESERVE_CASE_FIELDS = new Set(["LEGAL_TOP", "LEGAL_1", "LEGAL_2"]);
 
+// Keys of certificate/html/template.ts's FONT_FAMILY that make sense as
+// body text for a legal paragraph (sofiaBold has no regular weight, so
+// it's excluded here even though the template embeds it).
+const LEGAL_FONT_FAMILIES = ["arial", "arialNarrow", "timesNewRoman"] as const;
+
+const typographyFields = {
+  fontFamily: z.enum(LEGAL_FONT_FAMILIES).nullable().optional(),
+  lineHeight: z.number().min(1).max(3).nullable().optional(),
+};
+
 export const certificateFieldCreateSchema = z
   .object({
     name: z.string().trim().min(1).max(80).transform((v) => v.toUpperCase()),
     value: z.string().trim().min(1),
+    ...typographyFields,
   })
   .transform((data) => ({
     ...data,
@@ -20,6 +31,7 @@ export const certificateFieldUpdateSchema = z
   .object({
     name: z.string().trim().min(1).max(80).transform((v) => v.toUpperCase()).optional(),
     value: z.string().trim().min(1).optional(),
+    ...typographyFields,
   })
   .transform((data) => ({
     ...data,

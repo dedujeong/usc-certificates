@@ -11,7 +11,7 @@ import AlertMessage from "@/components/AlertMessage";
 import PageHeader from "@/components/PageHeader";
 import DataTableCard from "@/components/DataTableCard";
 import CertificateCanvas from "@/components/certificate/CertificateCanvas";
-import LegalTextField, { LegalTextPlaceholder } from "@/components/certificate/LegalTextField";
+import LegalTextField, { LegalTextPlaceholder, LegalTextTypography } from "@/components/certificate/LegalTextField";
 
 const QUERY_KEY = ["certificate-fields"];
 
@@ -52,6 +52,10 @@ const FIELD_LABELS: Record<string, string> = {
 
 const MULTILINE_FIELDS = new Set(["LEGAL_TOP", "LEGAL_1", "LEGAL_2"]);
 const DATE_FIELDS = new Set(["VIGENCIA"]);
+// Only these two support a per-paragraph typography override (see
+// certificate/html/template.ts) — LEGAL_TOP always uses the template's
+// default Arial styling.
+const TYPOGRAPHY_FIELDS = new Set(["LEGAL_1", "LEGAL_2"]);
 
 // Only LEGAL_TOP supports {placeholder} substitution (see
 // certificate/render/renderCertificate.ts's processedLegalTop); offered as
@@ -70,12 +74,17 @@ export default function CertificateFieldsPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState<CertificateField | null>(null);
-  const [form, setForm] = useState({ name: "", value: "" });
+  const [form, setForm] = useState<{ name: string; value: string; fontFamily: string | null; lineHeight: number | null }>({
+    name: "",
+    value: "",
+    fontFamily: null,
+    lineHeight: null,
+  });
   const [alert, setAlert] = useState<{ message: string; severity: "success" | "error" } | null>(null);
 
   function openCreate() {
     setEditing(null);
-    setForm({ name: "", value: "" });
+    setForm({ name: "", value: "", fontFamily: null, lineHeight: null });
     setDialogOpen(true);
   }
 
@@ -83,19 +92,19 @@ export default function CertificateFieldsPage() {
     const existing = fields.find((f) => f.name === name);
     if (existing) {
       setEditing(existing);
-      setForm({ name: existing.name, value: existing.value });
+      setForm({ name: existing.name, value: existing.value, fontFamily: existing.fontFamily, lineHeight: existing.lineHeight });
     } else {
       // Known field not created yet (shouldn't happen after seeding, but
       // handle it gracefully instead of silently doing nothing).
       setEditing(null);
-      setForm({ name, value: "" });
+      setForm({ name, value: "", fontFamily: null, lineHeight: null });
     }
     setDialogOpen(true);
   }
 
   function openEdit(f: CertificateField) {
     setEditing(f);
-    setForm({ name: f.name, value: f.value });
+    setForm({ name: f.name, value: f.value, fontFamily: f.fontFamily, lineHeight: f.lineHeight });
     setDialogOpen(true);
   }
 
@@ -147,6 +156,7 @@ export default function CertificateFieldsPage() {
   const dialogLabel = editing ? FIELD_LABELS[editing.name] ?? editing.name : FIELD_LABELS[form.name] ?? "Nuevo campo";
   const isLegalText = MULTILINE_FIELDS.has(form.name);
   const isDate = DATE_FIELDS.has(form.name);
+  const hasTypography = TYPOGRAPHY_FIELDS.has(form.name);
 
   return (
     <Container sx={{ mt: 2, mb: 6 }}>
@@ -198,6 +208,12 @@ export default function CertificateFieldsPage() {
               value={form.value}
               onChange={(value) => setForm({ ...form, value })}
               placeholders={form.name === "LEGAL_TOP" ? LEGAL_TOP_PLACEHOLDERS : undefined}
+              typography={hasTypography ? { fontFamily: form.fontFamily, lineHeight: form.lineHeight } : undefined}
+              onTypographyChange={
+                hasTypography
+                  ? (typography: LegalTextTypography) => setForm({ ...form, ...typography })
+                  : undefined
+              }
             />
           ) : (
             <TextField

@@ -37,6 +37,7 @@ export async function buildCertificateData(studentId: number): Promise<Omit<Cert
 
   const fields = await prisma.certificateField.findMany({ where: { name: { in: [...FIELD_NAMES] } } });
   const fieldMap = Object.fromEntries(fields.map((f) => [f.name, f.value]));
+  const styleMap = Object.fromEntries(fields.map((f) => [f.name, { fontFamily: f.fontFamily, lineHeight: f.lineHeight }]));
 
   const peopleRows = await prisma.person.findMany({ orderBy: { id: "asc" }, take: 7 });
   const people: Record<number, CertificatePerson> = {};
@@ -70,6 +71,10 @@ export async function buildCertificateData(studentId: number): Promise<Omit<Cert
     legalTop: fieldMap.LEGAL_TOP ?? "",
     legal1: fieldMap.LEGAL_1 ?? "",
     legal2: fieldMap.LEGAL_2 ?? "",
+    legal1FontFamily: styleMap.LEGAL_1?.fontFamily ?? null,
+    legal1LineHeight: styleMap.LEGAL_1?.lineHeight ?? null,
+    legal2FontFamily: styleMap.LEGAL_2?.fontFamily ?? null,
+    legal2LineHeight: styleMap.LEGAL_2?.lineHeight ?? null,
 
     studentId: student.id,
     studentName: [student.firstName, student.paternalName, student.maternalName].filter(Boolean).join(" "),
