@@ -2,13 +2,19 @@
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Box, Button, Container, Typography } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Box, Button, Container, IconButton, Tooltip, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import GradeIcon from "@mui/icons-material/Grade";
+import DescriptionIcon from "@mui/icons-material/Description";
+import { GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
 import { studentsApi, Student } from "@/lib/api/students";
 import { queryKeys } from "@/lib/queryKeys";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
+import StatusChip from "@/components/StatusChip";
+import PageHeader from "@/components/PageHeader";
+import DataTableCard from "@/components/DataTableCard";
 
 export default function StudentsPage() {
   const queryClient = useQueryClient();
@@ -29,26 +35,51 @@ export default function StudentsPage() {
   });
 
   const columns: GridColDef<Student>[] = [
-    { field: "tuition", headerName: "Matrícula", width: 120 },
-    { field: "firstName", headerName: "Nombre", flex: 1 },
-    { field: "paternalName", headerName: "Apellido paterno", flex: 1 },
-    { field: "maternalName", headerName: "Apellido materno", flex: 1 },
-    { field: "isActive", headerName: "Activo", width: 90, renderCell: (p) => (p.value ? "Sí" : "No") },
+    { field: "tuition", headerName: "Matrícula", width: 110 },
+    {
+      field: "firstName",
+      headerName: "Alumno",
+      flex: 1.4,
+      valueGetter: (_, row) => [row.firstName, row.paternalName, row.maternalName].filter(Boolean).join(" "),
+      renderCell: (params) => (
+        <Box>
+          <Typography variant="body2" sx={{ fontWeight: 600 }}>
+            {params.row.firstName}
+          </Typography>
+          <Typography variant="caption" color="text.secondary">
+            {[params.row.paternalName, params.row.maternalName].filter(Boolean).join(" ")}
+          </Typography>
+        </Box>
+      ),
+    },
+    {
+      field: "isActive",
+      headerName: "Estado",
+      width: 130,
+      renderCell: (p) => <StatusChip active={p.value} />,
+    },
     {
       field: "actions",
-      headerName: "Acciones",
-      width: 320,
+      headerName: "",
+      width: 220,
       sortable: false,
+      align: "right",
+      headerAlign: "right",
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Button size="small" component={Link} href={`/students/${params.row.id}/scores`}>
-            Calificaciones
-          </Button>
-          <Button size="small" component={Link} href={`/students/${params.row.id}/certificate`}>
-            Certificado
-          </Button>
+        <Box sx={{ display: "flex", gap: 0.5, alignItems: "center", justifyContent: "flex-end", width: "100%" }}>
+          <Tooltip title="Calificaciones">
+            <IconButton size="small" component={Link} href={`/students/${params.row.id}/scores`}>
+              <GradeIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Generar certificado">
+            <IconButton size="small" component={Link} href={`/students/${params.row.id}/certificate`}>
+              <DescriptionIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
           <Button
             size="small"
+            variant="outlined"
             color={params.row.isActive ? "error" : "success"}
             onClick={() => toggleActiveMutation.mutate({ id: params.row.id, isActive: !params.row.isActive })}
           >
@@ -60,14 +91,23 @@ export default function StudentsPage() {
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-        <Typography variant="h5">Alumnos</Typography>
-        <Button variant="contained" component={Link} href="/students/new">
-          Nuevo alumno
-        </Button>
-      </Box>
-      <DataGrid rows={students} columns={columns} loading={isLoading} autoHeight disableRowSelectionOnClick getRowId={(r) => r.id} />
+    <Container sx={{ mt: 2, mb: 6 }}>
+      <PageHeader
+        title="Alumnos"
+        subtitle="Consulta, edita y genera certificados de los alumnos registrados"
+        action={
+          <Button variant="contained" startIcon={<AddIcon />} component={Link} href="/students/new">
+            Nuevo alumno
+          </Button>
+        }
+      />
+      <DataTableCard
+        rows={students}
+        columns={columns}
+        loading={isLoading}
+        getRowId={(r) => r.id}
+        emptyLabel="No hay alumnos registrados todavía"
+      />
       {alert && <AlertMessage open={!!alert} message={alert.message} severity={alert.severity} onClose={() => setAlert(null)} />}
     </Container>
   );

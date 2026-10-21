@@ -1,6 +1,6 @@
 "use client";
 
-import { AppBar, Box, Button, Container, Toolbar, IconButton, useTheme } from "@mui/material";
+import { AppBar, Box, Button, Toolbar, IconButton, useTheme } from "@mui/material";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext } from "react";
@@ -41,13 +41,36 @@ export default function NavBar() {
   }
 
   return (
-    <AppBar position="sticky" elevation={0}>
-      <Container maxWidth={false} sx={{ px: { xs: 2, md: 4 } }}>
-        <Toolbar disableGutters sx={{ justifyContent: "space-between", py: 1 }}>
+    <Box
+      sx={{
+        position: "sticky",
+        top: 0,
+        zIndex: (t) => t.zIndex.appBar,
+        pt: { xs: 1.5, md: 2.5 },
+        px: { xs: 1.5, md: 4 },
+        pb: 1,
+        backgroundColor: "transparent",
+        pointerEvents: "none",
+      }}
+    >
+      <AppBar
+        position="static"
+        elevation={0}
+        sx={{
+          pointerEvents: "auto",
+          maxWidth: 1400,
+          mx: "auto",
+          borderRadius: 999,
+          border: "1px solid",
+          borderColor: "divider",
+          boxShadow: theme.palette.mode === "dark" ? "0 8px 24px rgba(0,0,0,0.35)" : "0 8px 24px rgba(28,27,23,0.08)",
+        }}
+      >
+        <Toolbar disableGutters sx={{ justifyContent: "space-between", py: 0.75, px: { xs: 1.5, md: 2 } }}>
           <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
-            <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ display: "flex", alignItems: "center", pl: 1 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/usc-logo-positive.svg" alt="Logo" width={36} height={36} />
+              <img src="/images/usc-logo-positive.svg" alt="Logo" width={32} height={32} />
             </Box>
             <Box
               sx={{
@@ -66,6 +89,7 @@ export default function NavBar() {
                     href={page.path}
                     key={page.title}
                     disableElevation
+                    size="small"
                     sx={{
                       borderRadius: 999,
                       px: 2,
@@ -88,7 +112,7 @@ export default function NavBar() {
             </Box>
           </Box>
 
-          <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 0.5, pr: 0.5 }}>
             <IconButton onClick={colorMode.toggleColorMode} sx={{ color: theme.palette.text.secondary }}>
               {theme.palette.mode === "dark" ? <Brightness7Icon fontSize="small" /> : <Brightness4Icon fontSize="small" />}
             </IconButton>
@@ -97,7 +121,7 @@ export default function NavBar() {
             </IconButton>
           </Box>
         </Toolbar>
-      </Container>
-    </AppBar>
+      </AppBar>
+    </Box>
   );
 }

@@ -15,21 +15,21 @@ export default function CardItem({ title, caption, path }: CardItemProps) {
       <Card
         sx={{
           minHeight: "11rem",
-          padding: 2,
-          transition: "0.2s",
-          "&:hover": { transform: "scale(1.05)" },
-          borderRadius: "1rem",
-          boxShadow: 6,
+          padding: 1,
+          transition: "transform 0.2s, box-shadow 0.2s",
+          "&:hover": { transform: "translateY(-2px)", boxShadow: "0 8px 20px rgba(28,27,23,0.08)" },
         }}
       >
-        <CardActionArea>
-          <CardContent sx={{ display: "flex", flexDirection: "column", minHeight: "2rem" }}>
+        <CardActionArea component={Link} href={path}>
+          <CardContent sx={{ display: "flex", flexDirection: "column", minHeight: "3rem" }}>
             <Typography variant="h6">{title}</Typography>
-            <Typography variant="caption">{caption}</Typography>
+            <Typography variant="caption" color="text.secondary">
+              {caption}
+            </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button component={Link} href={path} variant="contained">
+          <Button component={Link} href={path} variant="contained" size="small">
             Administrar
           </Button>
         </CardActions>

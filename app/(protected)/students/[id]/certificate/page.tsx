@@ -36,9 +36,9 @@ export default function StudentCertificatePage({ params }: { params: Promise<{ i
   }
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Paper sx={{ p: 4 }}>
-        <Typography variant="h5" sx={{ mb: 2 }}>
+    <Container maxWidth="sm" sx={{ mt: 2, mb: 6 }}>
+      <Paper elevation={0} sx={{ p: 4, border: "1px solid", borderColor: "divider" }}>
+        <Typography variant="h4" sx={{ mb: 2 }}>
           Generar certificado
         </Typography>
 

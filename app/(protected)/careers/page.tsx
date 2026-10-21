@@ -2,25 +2,16 @@
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Box,
-  Button,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { careersApi, Career } from "@/lib/api/careers";
 import { queryKeys } from "@/lib/queryKeys";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
 import StatusChip from "@/components/StatusChip";
+import PageHeader from "@/components/PageHeader";
+import DataTableCard from "@/components/DataTableCard";
 
 export default function CareersPage() {
   const queryClient = useQueryClient();
@@ -118,33 +109,24 @@ export default function CareersPage() {
   ];
 
   return (
-    <Container sx={{ mt: 5, mb: 6 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", mb: 3 }}>
-        <Box>
-          <Typography variant="h4" component="h1">
-            Carreras
-          </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
-            Catálogo de carreras ofrecidas por la universidad
-          </Typography>
-        </Box>
-        <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
-          Nueva carrera
-        </Button>
-      </Box>
+    <Container sx={{ mt: 2, mb: 6 }}>
+      <PageHeader
+        title="Carreras"
+        subtitle="Catálogo de carreras ofrecidas por la universidad"
+        action={
+          <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
+            Nueva carrera
+          </Button>
+        }
+      />
 
-      <Paper elevation={0} sx={{ border: "1px solid", borderColor: "divider", overflow: "hidden" }}>
-        <DataGrid
-          rows={careers}
-          columns={columns}
-          loading={isLoading}
-          autoHeight
-          disableRowSelectionOnClick
-          getRowId={(row) => row.id}
-          rowHeight={60}
-          sx={{ border: "none" }}
-        />
-      </Paper>
+      <DataTableCard
+        rows={careers}
+        columns={columns}
+        loading={isLoading}
+        getRowId={(row) => row.id}
+        emptyLabel="No hay carreras registradas todavía"
+      />
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="xs">
         <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>{editing ? "Editar carrera" : "Nueva carrera"}</DialogTitle>

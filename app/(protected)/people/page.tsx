@@ -2,22 +2,14 @@
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Box,
-  Button,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { GridColDef } from "@mui/x-data-grid";
 import { peopleApi, Person } from "@/lib/api/people";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
+import PageHeader from "@/components/PageHeader";
+import DataTableCard from "@/components/DataTableCard";
 
 const QUERY_KEY = ["people"];
 
@@ -64,18 +56,25 @@ export default function PeoplePage() {
     { field: "prefix", headerName: "Prefijo", width: 100 },
     { field: "name", headerName: "Nombre", flex: 1 },
     { field: "charge", headerName: "Cargo", flex: 1 },
-    { field: "gender", headerName: "Género", width: 100 },
+    {
+      field: "gender",
+      headerName: "Género",
+      width: 120,
+      valueGetter: (value) => (value === "male" ? "Masculino" : "Femenino"),
+    },
     {
       field: "actions",
-      headerName: "Acciones",
+      headerName: "",
       width: 180,
       sortable: false,
+      align: "right",
+      headerAlign: "right",
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Button size="small" onClick={() => openEdit(params.row)}>
+        <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end", width: "100%" }}>
+          <Button size="small" variant="outlined" onClick={() => openEdit(params.row)}>
             Editar
           </Button>
-          <Button size="small" color="error" onClick={() => removeMutation.mutate(params.row.id)}>
+          <Button size="small" variant="outlined" color="error" onClick={() => removeMutation.mutate(params.row.id)}>
             Eliminar
           </Button>
         </Box>
@@ -84,17 +83,26 @@ export default function PeoplePage() {
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-        <Typography variant="h5">Firmantes del certificado</Typography>
-        <Button variant="contained" onClick={openCreate}>
-          Nuevo firmante
-        </Button>
-      </Box>
-      <DataGrid rows={people} columns={columns} loading={isLoading} autoHeight disableRowSelectionOnClick getRowId={(r) => r.id} />
+    <Container sx={{ mt: 2, mb: 6 }}>
+      <PageHeader
+        title="Firmantes del certificado"
+        subtitle="Personas que aparecen firmando en el certificado (director, secretario, etc.)"
+        action={
+          <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
+            Nuevo firmante
+          </Button>
+        }
+      />
+      <DataTableCard
+        rows={people}
+        columns={columns}
+        loading={isLoading}
+        getRowId={(r) => r.id}
+        emptyLabel="No hay firmantes registrados todavía"
+      />
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="xs">
-        <DialogTitle>{editing ? "Editar firmante" : "Nuevo firmante"}</DialogTitle>
+        <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>{editing ? "Editar firmante" : "Nuevo firmante"}</DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
           <TextField label="Prefijo (Lic., Dr., etc.)" value={form.prefix} onChange={(e) => setForm({ ...form, prefix: e.target.value })} />
           <TextField label="Nombre" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
@@ -104,8 +112,10 @@ export default function PeoplePage() {
             <MenuItem value="female">Femenino</MenuItem>
           </TextField>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button onClick={() => setDialogOpen(false)} color="inherit">
+            Cancelar
+          </Button>
           <Button variant="contained" disabled={!form.name.trim() || !form.charge.trim()} onClick={() => saveMutation.mutate()}>
             Guardar
           </Button>

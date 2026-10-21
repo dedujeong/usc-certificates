@@ -2,24 +2,17 @@
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Box,
-  Button,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  MenuItem,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, TextField } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { GridColDef } from "@mui/x-data-grid";
 import { subjectsApi, Subject } from "@/lib/api/subjects";
 import { careersApi } from "@/lib/api/careers";
 import { queryKeys } from "@/lib/queryKeys";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
+import StatusChip from "@/components/StatusChip";
+import PageHeader from "@/components/PageHeader";
+import DataTableCard from "@/components/DataTableCard";
 
 export default function SubjectsPage() {
   const queryClient = useQueryClient();
@@ -79,28 +72,35 @@ export default function SubjectsPage() {
   });
 
   const columns: GridColDef<Subject>[] = [
-    { field: "id", headerName: "ID", width: 70 },
     {
       field: "careerId",
       headerName: "Carrera",
       flex: 1,
       valueGetter: (_, row) => careers.find((c) => c.id === row.careerId)?.name ?? row.careerId,
     },
-    { field: "name", headerName: "Materia", flex: 1 },
-    { field: "period", headerName: "Periodo", width: 100 },
-    { field: "isActive", headerName: "Activa", width: 100, renderCell: (p) => (p.value ? "Sí" : "No") },
+    { field: "name", headerName: "Materia", flex: 1.2 },
+    { field: "period", headerName: "Periodo", width: 100, align: "center", headerAlign: "center" },
+    {
+      field: "isActive",
+      headerName: "Estado",
+      width: 130,
+      renderCell: (p) => <StatusChip active={p.value} activeLabel="Activa" inactiveLabel="Inactiva" />,
+    },
     {
       field: "actions",
-      headerName: "Acciones",
+      headerName: "",
       width: 220,
       sortable: false,
+      align: "right",
+      headerAlign: "right",
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Button size="small" onClick={() => openEdit(params.row)}>
+        <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end", width: "100%" }}>
+          <Button size="small" variant="outlined" onClick={() => openEdit(params.row)}>
             Editar
           </Button>
           <Button
             size="small"
+            variant="outlined"
             color={params.row.isActive ? "error" : "success"}
             onClick={() => toggleActiveMutation.mutate({ id: params.row.id, isActive: !params.row.isActive })}
           >
@@ -112,17 +112,27 @@ export default function SubjectsPage() {
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-        <Typography variant="h5">Materias</Typography>
-        <Button variant="contained" onClick={openCreate} disabled={careers.length === 0}>
-          Nueva materia
-        </Button>
-      </Box>
-      <DataGrid rows={subjects} columns={columns} loading={isLoading} autoHeight disableRowSelectionOnClick getRowId={(r) => r.id} />
+    <Container sx={{ mt: 2, mb: 6 }}>
+      <PageHeader
+        title="Materias"
+        subtitle="Catálogo de materias por carrera y periodo"
+        action={
+          <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate} disabled={careers.length === 0}>
+            Nueva materia
+          </Button>
+        }
+      />
+
+      <DataTableCard
+        rows={subjects}
+        columns={columns}
+        loading={isLoading}
+        getRowId={(r) => r.id}
+        emptyLabel="No hay materias registradas todavía"
+      />
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="xs">
-        <DialogTitle>{editing ? "Editar materia" : "Nueva materia"}</DialogTitle>
+        <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>{editing ? "Editar materia" : "Nueva materia"}</DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
           <TextField
             select
@@ -151,8 +161,10 @@ export default function SubjectsPage() {
             ))}
           </TextField>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button onClick={() => setDialogOpen(false)} color="inherit">
+            Cancelar
+          </Button>
           <Button
             variant="contained"
             disabled={!form.name.trim() || !form.careerId}

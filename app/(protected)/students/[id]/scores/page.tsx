@@ -2,16 +2,8 @@
 
 import { use, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Box,
-  Button,
-  Container,
-  MenuItem,
-  Paper,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Box, Chip, Container, MenuItem, Paper, TextField, Typography } from "@mui/material";
+import { GridColDef } from "@mui/x-data-grid";
 import { studentsApi } from "@/lib/api/students";
 import { studentCareersApi } from "@/lib/api/studentCareers";
 import { subjectsApi } from "@/lib/api/subjects";
@@ -19,6 +11,8 @@ import { scoresApi, Score, ScoreObservation } from "@/lib/api/scores";
 import { queryKeys } from "@/lib/queryKeys";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
+import PageHeader from "@/components/PageHeader";
+import DataTableCard from "@/components/DataTableCard";
 
 const OBSERVATIONS: ScoreObservation[] = ["EX", "TS", "EQ", "REC"];
 
@@ -47,7 +41,7 @@ export default function StudentScoresPage({ params }: { params: Promise<{ id: st
 
   const upsertMutation = useMutation({
     mutationFn: ({ subjectId, value, observation }: { subjectId: number; value: string; observation: ScoreObservation | "" }) => {
-      const existing = scores.find((s) => s.subjectId === subjectId);
+      const existing = scores.find((s: Score) => s.subjectId === subjectId);
       const payload = { value: Number(value), observation: observation || undefined };
       return existing ? scoresApi.update(existing.id, payload) : scoresApi.create({ studentId, subjectId, ...payload });
     },
@@ -65,13 +59,13 @@ export default function StudentScoresPage({ params }: { params: Promise<{ id: st
 
   const columns: GridColDef[] = [
     { field: "name", headerName: "Materia", flex: 1 },
-    { field: "period", headerName: "Periodo", width: 90 },
+    { field: "period", headerName: "Periodo", width: 100, align: "center", headerAlign: "center" },
     {
       field: "value",
       headerName: "Calificación",
-      width: 140,
+      width: 150,
       renderCell: (params) => {
-        const existing = scores.find((s) => s.subjectId === params.row.id);
+        const existing = scores.find((s: Score) => s.subjectId === params.row.id);
         return (
           <TextField
             size="small"
@@ -89,9 +83,9 @@ export default function StudentScoresPage({ params }: { params: Promise<{ id: st
     {
       field: "observation",
       headerName: "Observación",
-      width: 140,
+      width: 160,
       renderCell: (params) => {
-        const existing = scores.find((s) => s.subjectId === params.row.id);
+        const existing = scores.find((s: Score) => s.subjectId === params.row.id);
         return (
           <TextField
             select
@@ -116,27 +110,34 @@ export default function StudentScoresPage({ params }: { params: Promise<{ id: st
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Typography variant="h5">Calificaciones {student ? `— ${student.firstName} ${student.paternalName ?? ""}` : ""}</Typography>
+    <Container sx={{ mt: 2, mb: 6 }}>
+      <PageHeader
+        title="Calificaciones"
+        subtitle={student ? `${student.firstName} ${student.paternalName ?? ""} — Matrícula ${student.tuition}` : undefined}
+        action={
+          activeCareer && average !== null ? (
+            <Box sx={{ textAlign: "right" }}>
+              <Typography variant="caption" color="text.secondary" display="block">
+                Promedio general
+              </Typography>
+              <Chip label={average} color="secondary" sx={{ fontSize: 18, px: 1, height: 36 }} />
+            </Box>
+          ) : undefined
+        }
+      />
+
       {!activeCareer && (
-        <Paper sx={{ p: 2, mt: 2 }}>
-          <Typography>Este alumno no tiene una inscripción activa a ninguna carrera.</Typography>
+        <Paper elevation={0} sx={{ p: 3, border: "1px solid", borderColor: "divider" }}>
+          <Typography color="text.secondary">Este alumno no tiene una inscripción activa a ninguna carrera.</Typography>
         </Paper>
       )}
+
       {activeCareer && (
         <>
           <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
             Carrera: {activeCareer.career?.name}
-            {average !== null && ` — Promedio general: ${average}`}
           </Typography>
-          <DataGrid
-            rows={subjects}
-            columns={columns}
-            autoHeight
-            disableRowSelectionOnClick
-            getRowId={(r) => r.id}
-            hideFooter
-          />
+          <DataTableCard rows={subjects} columns={columns} getRowId={(r) => r.id} hideFooter hideSearch emptyLabel="Esta carrera no tiene materias registradas" />
         </>
       )}
       {alert && <AlertMessage open={!!alert} message={alert.message} severity={alert.severity} onClose={() => setAlert(null)} />}

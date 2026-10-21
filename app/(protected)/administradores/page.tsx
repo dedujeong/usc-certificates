@@ -2,14 +2,18 @@
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Box, Button, Container, Typography } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Button, Chip, Container } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
 import { administratorsApi, Administrator } from "@/lib/api/administrators";
 import { queryKeys } from "@/lib/queryKeys";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
 import RequireRole from "@/components/ProtectedRoute";
+import StatusChip from "@/components/StatusChip";
+import PageHeader from "@/components/PageHeader";
+import DataTableCard from "@/components/DataTableCard";
 
 function AdministratorsContent() {
   const queryClient = useQueryClient();
@@ -32,16 +36,37 @@ function AdministratorsContent() {
   const columns: GridColDef<Administrator>[] = [
     { field: "firstName", headerName: "Nombre", flex: 1 },
     { field: "email", headerName: "Correo", flex: 1, valueGetter: (_, row) => row.user.email },
-    { field: "role", headerName: "Rol", width: 130, valueGetter: (_, row) => row.user.role },
-    { field: "isActive", headerName: "Activo", width: 90, renderCell: (p) => (p.value ? "Sí" : "No") },
+    {
+      field: "role",
+      headerName: "Rol",
+      width: 150,
+      valueGetter: (_, row) => row.user.role,
+      renderCell: (params) => (
+        <Chip
+          size="small"
+          label={params.value === "superAdmin" ? "Super admin" : "Admin"}
+          variant={params.value === "superAdmin" ? "filled" : "outlined"}
+          color={params.value === "superAdmin" ? "secondary" : "default"}
+        />
+      ),
+    },
+    {
+      field: "isActive",
+      headerName: "Estado",
+      width: 130,
+      renderCell: (p) => <StatusChip active={p.value} />,
+    },
     {
       field: "actions",
-      headerName: "Acciones",
+      headerName: "",
       width: 150,
       sortable: false,
+      align: "right",
+      headerAlign: "right",
       renderCell: (params) => (
         <Button
           size="small"
+          variant="outlined"
           color={params.row.isActive ? "error" : "success"}
           onClick={() => toggleActiveMutation.mutate({ id: params.row.id, isActive: !params.row.isActive })}
         >
@@ -52,14 +77,23 @@ function AdministratorsContent() {
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-        <Typography variant="h5">Administradores</Typography>
-        <Button variant="contained" component={Link} href="/administradores/new">
-          Nuevo administrador
-        </Button>
-      </Box>
-      <DataGrid rows={administrators} columns={columns} loading={isLoading} autoHeight disableRowSelectionOnClick getRowId={(r) => r.id} />
+    <Container sx={{ mt: 2, mb: 6 }}>
+      <PageHeader
+        title="Administradores"
+        subtitle="Cuentas con acceso al sistema y sus roles"
+        action={
+          <Button variant="contained" startIcon={<AddIcon />} component={Link} href="/administradores/new">
+            Nuevo administrador
+          </Button>
+        }
+      />
+      <DataTableCard
+        rows={administrators}
+        columns={columns}
+        loading={isLoading}
+        getRowId={(r) => r.id}
+        emptyLabel="No hay administradores registrados todavía"
+      />
       {alert && <AlertMessage open={!!alert} message={alert.message} severity={alert.severity} onClose={() => setAlert(null)} />}
     </Container>
   );
