@@ -79,7 +79,12 @@ export default function LegalTextField({ value, onChange, placeholders }: LegalT
 
         {placeholders && placeholders.length > 0 && (
           <>
-            <Button size="small" startIcon={<DataObjectIcon fontSize="small" />} onClick={(e) => setMenuAnchor(e.currentTarget)}>
+            <Button
+              size="small"
+              variant="outlined"
+              startIcon={<DataObjectIcon fontSize="small" />}
+              onClick={(e) => setMenuAnchor(e.currentTarget)}
+            >
               Insertar variable
             </Button>
             <Menu anchorEl={menuAnchor} open={!!menuAnchor} onClose={() => setMenuAnchor(null)}>
