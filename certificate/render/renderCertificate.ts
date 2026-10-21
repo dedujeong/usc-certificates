@@ -420,28 +420,49 @@ export async function renderCertificate(data: CertificateData): Promise<void> {
   doc.setFontSize(10);
   const finalYOfLegal1 = drawFormattedText(doc, data.legal1, 110, 235, 95, 4.5);
   const yForLegal2 = finalYOfLegal1 + 4.5 * 2;
-  drawFormattedText(doc, data.legal2, 110, yForLegal2, 95, 4.5);
+  const finalYOfLegal2 = drawFormattedText(doc, data.legal2, 110, yForLegal2, 95, 4.5);
+
+  // The signature block below legal1/legal2 used to sit at fixed Y
+  // coordinates (285 onward), which only worked because the legal text was
+  // always short enough to end well above them. Since LEGAL_1/LEGAL_2 are
+  // now editable admin fields (Administrar > Campos de certificado) and can
+  // be any length, the whole block is anchored to where legal2 actually
+  // ends instead, with a minimum gap — so it only shifts down when the text
+  // grows, and renders identically to before for text that fits the old
+  // space. `LEGAL_TEXT_GAP` is the breathing room left between the last
+  // line of legal2 and the signature block.
+  const LEGAL_TEXT_GAP = 10;
+  const DEFAULT_SIGNATURE_BLOCK_Y = 285;
+  const signatureBlockY = Math.max(DEFAULT_SIGNATURE_BLOCK_Y, finalYOfLegal2 + LEGAL_TEXT_GAP);
+  const signatureShift = signatureBlockY - DEFAULT_SIGNATURE_BLOCK_Y;
 
   doc.setFont("TimesNewRoman", "normal");
   doc.setFontSize(10);
-  doc.text(data.people[4].name, getCenteredX(doc, data.people[4].name, 110, 200), 285);
+  doc.text(data.people[4].name, getCenteredX(doc, data.people[4].name, 110, 200), signatureBlockY);
   doc.setFont("Arial", "bold");
   doc.setFontSize(9);
-  doc.text("____________________________________________________", 110, 286);
+  doc.text("____________________________________________________", 110, 286 + signatureShift);
   doc.setFont("Arial", "normal");
   doc.setFontSize(8);
-  doc.text("TUXTLA GUTIÉRREZ, CHIAPAS; A", 110, 298);
+  doc.text("TUXTLA GUTIÉRREZ, CHIAPAS; A", 110, 298 + signatureShift);
   doc.setFont("Arial", "bold");
   doc.setFontSize(9);
-  doc.text("__________________________", 157, 298);
+  doc.text("__________________________", 157, 298 + signatureShift);
 
   doc.setFont("Arial", "normal");
   doc.setFontSize(9);
-  doc.text(`${data.people[6].charge}`, 156, 320, { maxWidth: 100, align: "center" });
-  doc.text("____________________________________________________", 110, 312);
+  doc.text(`${data.people[6].charge}`, 156, 320 + signatureShift, { maxWidth: 100, align: "center" });
+  doc.text("____________________________________________________", 110, 312 + signatureShift);
   doc.setFont("TimesNewRoman", "normal");
   doc.setFontSize(10);
-  doc.text(data.people[6].name, getCenteredX(doc, data.people[6].name, 110, 200), 316, { maxWidth: 87 });
+  doc.text(data.people[6].name, getCenteredX(doc, data.people[6].name, 110, 200), 316 + signatureShift, { maxWidth: 87 });
+
+  if (signatureShift > 0) {
+    console.warn(
+      `certificate: legal1/legal2 text pushed the signature block down by ${signatureShift.toFixed(1)}mm; ` +
+        `verify it still fits above the page break (page 2 ends at y=343mm) before printing.`,
+    );
+  }
 
   doc.save(`${data.exp}-${data.studentTuition}-CER-AQ`);
 }
