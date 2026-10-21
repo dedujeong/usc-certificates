@@ -68,6 +68,7 @@ export default function CertificateFieldsPage() {
   const queryClient = useQueryClient();
   const { data: fields = [], isLoading } = useQuery({ queryKey: QUERY_KEY, queryFn: certificateFieldsApi.list });
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [editing, setEditing] = useState<CertificateField | null>(null);
   const [form, setForm] = useState({ name: "", value: "" });
   const [alert, setAlert] = useState<{ message: string; severity: "success" | "error" } | null>(null);
@@ -103,6 +104,7 @@ export default function CertificateFieldsPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
       setAlert({ message: "Guardado", severity: "success" });
+      setConfirmOpen(false);
       setDialogOpen(false);
     },
     onError: (err) => setAlert({ message: err instanceof ApiError ? err.message : "Error al guardar", severity: "error" }),
@@ -211,8 +213,46 @@ export default function CertificateFieldsPage() {
           <Button onClick={() => setDialogOpen(false)} color="inherit">
             Cancelar
           </Button>
-          <Button variant="contained" disabled={!form.name.trim() || !form.value.trim()} onClick={() => saveMutation.mutate()}>
+          <Button variant="contained" disabled={!form.name.trim() || !form.value.trim()} onClick={() => setConfirmOpen(true)}>
             Guardar
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* There's no "undo" once this is saved — the certificate renderer
+          reads it live on the next generation — so this confirms the
+          before/after instead of saving straight from the edit dialog. */}
+      <Dialog open={confirmOpen} onClose={() => setConfirmOpen(false)} fullWidth maxWidth="xs">
+        <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>¿Guardar este cambio?</DialogTitle>
+        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Typography variant="body2" color="text.secondary">
+            {dialogLabel}
+          </Typography>
+          {editing && (
+            <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: "10px", p: 1.5 }}>
+              <Typography variant="caption" color="text.secondary" sx={{ display: "block" }}>
+                Antes
+              </Typography>
+              <Typography variant="body2" sx={{ whiteSpace: "pre-wrap", textDecoration: "line-through", opacity: 0.6 }}>
+                {editing.value}
+              </Typography>
+            </Box>
+          )}
+          <Box sx={{ border: "1px solid", borderColor: "secondary.main", borderRadius: "10px", p: 1.5 }}>
+            <Typography variant="caption" color="secondary.main" sx={{ display: "block" }}>
+              {editing ? "Después" : "Nuevo valor"}
+            </Typography>
+            <Typography variant="body2" sx={{ whiteSpace: "pre-wrap" }}>
+              {form.value}
+            </Typography>
+          </Box>
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button onClick={() => setConfirmOpen(false)} color="inherit">
+            Seguir editando
+          </Button>
+          <Button variant="contained" disabled={saveMutation.isPending} onClick={() => saveMutation.mutate()}>
+            {saveMutation.isPending ? "Guardando..." : "Confirmar y guardar"}
           </Button>
         </DialogActions>
       </Dialog>
