@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# USC Certificates
 
-## Getting Started
+Sistema interno de gestión de certificados académicos: registro de alumnos, carreras, materias, calificaciones y generación del certificado en PDF. Reescritura completa del sistema original (React+Vite / Express+Sequelize / MySQL) sobre Next.js + PostgreSQL + Prisma.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router) — frontend y backend en una sola app (Route Handlers), sin CORS.
+- **PostgreSQL 16** + **Prisma 6** como ORM.
+- **MUI v6** para la UI, **TanStack Query** para fetching/caching del cliente.
+- **Zod** para validación de inputs.
+- **JWT (localStorage) + bcrypt** para autenticación, roles `admin` / `superAdmin`.
+- **Vitest** + **React Testing Library** para tests.
+- **Docker** para Postgres en desarrollo y para autohospedaje en producción.
+
+## Desarrollo local
+
+Requisitos: Node 22+, Docker (para Postgres).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env          # ajusta DATABASE_URL/JWT_SECRET si hace falta
+docker compose up -d postgres # levanta solo Postgres
+npm install
+npx prisma migrate dev        # aplica el esquema
+npx prisma db seed            # datos de ejemplo + usuarios de prueba
+npm run dev                   # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Credenciales de desarrollo creadas por el seed (cámbialas antes de cualquier despliegue real):
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Rol | Email | Password |
+|---|---|---|
+| superAdmin | `superadmin@usc.dev` | `ChangeMe123!` |
+| admin | `admin@usc.dev` | `ChangeMe123!` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Tests
 
-## Learn More
+```bash
+npm test
+```
 
-To learn more about Next.js, take a look at the following resources:
+Usa una base de datos de prueba separada (`usc_certificates_test`, en el mismo contenedor de Postgres). Debe existir antes de correr los tests:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+docker exec -it <contenedor-postgres> psql -U usc -d postgres -c "CREATE DATABASE usc_certificates_test OWNER usc;"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Las migraciones contra esa base se aplican automáticamente al correr `npm test` (ver `tests/globalSetup.ts`).
 
-## Deploy on Vercel
+## Despliegue con Docker (autohospedaje)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+export JWT_SECRET="un-secreto-largo-y-aleatorio"
+docker compose --profile prod build
+docker compose --profile prod run --rm migrate   # aplica migraciones pendientes
+docker compose --profile prod up -d app          # http://localhost:3000
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El `Dockerfile` usa un build multi-stage con la salida `standalone` de Next.js (imagen final sin `node_modules` completo). El servicio `migrate` reutiliza la etapa `builder` (que sí tiene el CLI de Prisma) para aplicar el esquema antes de levantar `app`. Vuelve a correr `migrate` después de cada despliegue que incluya cambios de esquema.
+
+Variables de entorno requeridas en producción: `DATABASE_URL`, `JWT_SECRET` (el compose falla explícitamente si falta), `JWT_EXPIRES_IN` (opcional, default `8h`).
+
+## Estructura del proyecto
+
+```
+app/
+  (public)/login/          # página de login
+  (protected)/              # layout con guard de sesión (CSR)
+  api/                       # Route Handlers por recurso
+lib/
+  auth/                      # JWT, bcrypt, guards, AuthContext (cliente)
+  server/                    # handleRoute (manejo de errores uniforme), crudFactory, services
+  validators/                # schemas Zod compartidos
+  api/                       # cliente API tipado (TanStack Query)
+certificate/
+  render/                    # generador de PDF (jsPDF), modularizado
+prisma/
+  schema.prisma, seed.ts, migrations/
+```
+
+## Decisiones de diseño relevantes
+
+- **Auth**: JWT en `localStorage` (no cookies httpOnly) — decisión ya documentada en el diseño original del épico de autenticación, para una herramienta interna de bajo riesgo de XSS externo. El guard de rutas protegidas es puramente client-side (puede haber un parpadeo breve al recargar), por fidelidad a ese diseño.
+- **Matrícula de alumnos**: se genera con una secuencia de Postgres (`student_tuition_seq`), consumida atómicamente en el insert — evita colisiones bajo registros concurrentes (bug presente en el sistema anterior, que calculaba el siguiente número en el cliente).
+- **Inscripción a carrera**: solo puede haber una inscripción *activa* por alumno (índice único parcial en Postgres), pero sí se permite re-inscribir a un alumno en otra carrera después de dar de baja la inscripción anterior (el sistema anterior lo bloqueaba indefinidamente).
+- **Calificaciones**: `Decimal(3,1)` exacto (el sistema anterior usaba `INTEGER`, truncando decimales).
+- **Generador de certificado**: motor de texto con formato (`*negrita*`, `_subrayado_`) heredado tal cual del sistema anterior por ser una pieza ya validada visualmente; lo que cambió es que ya no mezcla fetch de datos con renderizado, y las fuentes/imágenes son archivos reales en `public/` en vez de base64 embebido en código.
