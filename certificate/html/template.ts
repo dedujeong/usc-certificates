@@ -52,6 +52,12 @@ interface TextOpts {
   html?: boolean; // treat `text` as already-escaped HTML (bold/underline markup)
   underline?: boolean;
   whiteSpace?: "nowrap" | "pre" | "normal";
+  // jsPDF's `doc.text(text, x, y, { align: "center", maxWidth })` keeps `x`
+  // as the CENTER point the text is anchored around — `maxWidth` only caps
+  // line-wrapping, it does not turn `x` into a box's left edge the way
+  // `width` does above. Use this for ports of that exact call shape; mixing
+  // it up with plain box mode displaces the text by half its width.
+  anchorAtCenter?: boolean;
 }
 
 function textEl(text: string, x: number, y: number, size: number, opts: TextOpts = {}): string {
@@ -69,7 +75,9 @@ function textEl(text: string, x: number, y: number, size: number, opts: TextOpts
   const alignStyles =
     opts.align === "center"
       ? opts.width
-        ? `left:${x}mm; width:${opts.width}mm; text-align:center;`
+        ? opts.anchorAtCenter
+          ? `left:${x}mm; width:${opts.width}mm; transform:translateX(-50%); text-align:center;`
+          : `left:${x}mm; width:${opts.width}mm; text-align:center;`
         : `left:${x}mm; transform:translateX(-50%); text-align:center;`
       : opts.align === "right"
         ? opts.width
@@ -110,11 +118,14 @@ function renderPeriodTable(data: CertificateData, config: PeriodTableConfig, per
   const header = [
     imageEl("{{table}}", x, y, 96, 60),
     textEl(title, x + 11, y + 7, 10, { font: "arialNarrow" }),
-    textEl("CALIFICACIÓN", x + 56.5, y + 4, 9),
-    textEl("Cifra", x + 57.5, y + 9, 9),
-    textEl("Letra", x + 67.5, y + 9, 9),
-    textEl("OBSERVA-", x + 85, y + 2, 10, { align: "center" }),
-    textEl("CIONES", x + 85, y + 6.5, 10, { align: "center" }),
+    // The old jsPDF version used ArialNarrow for this header (narrower than
+    // the regular Arial these were defaulting to), which is why it fit
+    // without colliding into the OBSERVACIONES column.
+    textEl("CALIFICACIÓN", x + 56.5, y + 4, 9, { font: "arialNarrow" }),
+    textEl("Cifra", x + 57.5, y + 9, 9, { font: "arialNarrow" }),
+    textEl("Letra", x + 67.5, y + 9, 9, { font: "arialNarrow" }),
+    textEl("OBSERVA-", x + 85, y + 2, 10, { align: "center", font: "arialNarrow" }),
+    textEl("CIONES", x + 85, y + 6.5, 10, { align: "center", font: "arialNarrow" }),
   ].join("");
 
   const rows = subjects
@@ -262,11 +273,11 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     ${textEl("PROMEDIO GENERAL:", 10, averageTextY, 9, { bold: true })}
     ${textEl(`${averageScore}  ( ${averageScoreText} )`, 55, averageTextY, 9, { font: "timesNewRoman", bold: true })}
 
-    ${textEl(`${data.people[1].charge} «${data.schoolName}»`, 55, firstPairY, 9, { bold: true, align: "center", width: 60, whiteSpace: "normal" })}
+    ${textEl(`${data.people[1].charge} «${data.schoolName}»`, 55, firstPairY, 9, { bold: true, align: "center", width: 60, whiteSpace: "normal", anchorAtCenter: true })}
     ${lineEl(10, firstPairLineY, 90)}
     ${textEl(data.people[1].name, 10, firstPairNameY, 10, { font: "timesNewRoman", align: "center", width: 90, whiteSpace: "normal" })}
 
-    ${textEl(`${data.people[2].charge} «${data.schoolName}»`, 155, firstPairY, 9, { bold: true, align: "center", width: 50, whiteSpace: "normal" })}
+    ${textEl(`${data.people[2].charge} «${data.schoolName}»`, 155, firstPairY, 9, { bold: true, align: "center", width: 50, whiteSpace: "normal", anchorAtCenter: true })}
     ${lineEl(110, firstPairLineY, 90)}
     ${textEl(data.people[2].name, 110, firstPairNameY, 10, { font: "timesNewRoman", align: "center", width: 90, whiteSpace: "normal" })}
   `;
@@ -275,16 +286,16 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     ${imageEl("{{square}}", 110, 74, 96, 50)}
     <div style="position:absolute; left:111.5mm; top:78mm; width:93mm; font-family:'${FONT_FAMILY.arial}'; font-size:10.7pt; text-align:justify; hyphens:auto;">${markupToHtml(processedLegalTop)}</div>
 
-    ${textEl(data.people[3].charge, 55, 190, 9, { bold: true, align: "center", width: 60, whiteSpace: "normal" })}
+    ${textEl(data.people[3].charge, 55, 190, 9, { bold: true, align: "center", width: 60, whiteSpace: "normal", anchorAtCenter: true })}
     ${lineEl(10, 210, 90)}
     ${textEl(data.people[3].name, 10, 215, 10, { font: "timesNewRoman", align: "center", width: 90, whiteSpace: "normal" })}
 
-    ${textEl(data.people[4].charge, 155, 190, 9, { bold: true, align: "center", width: 50, whiteSpace: "normal" })}
+    ${textEl(data.people[4].charge, 155, 190, 9, { bold: true, align: "center", width: 50, whiteSpace: "normal", anchorAtCenter: true })}
     ${lineEl(110, 210, 90)}
     ${textEl(data.people[4].name, 110, 215, 10, { font: "timesNewRoman", align: "center", width: 90, whiteSpace: "normal" })}
 
     ${imageEl("{{scholarServicesTable}}", 10, 230, 60, 95)}
-    ${textEl("REGISTRADO EN EL DEPARTAMENTO DE SERVICIOS ESCOLARES", 40, 235.5, 8.5, { align: "center", width: 60, whiteSpace: "normal" })}
+    ${textEl("REGISTRADO EN EL DEPARTAMENTO DE SERVICIOS ESCOLARES", 40, 235.5, 8.5, { align: "center", width: 60, whiteSpace: "normal", anchorAtCenter: true })}
     ${textEl("CON Nº:", 12, 252, 10)}
     ${textEl("EN EL LIBRO:", 12, 262, 10)}
     ${textEl("FOJA:", 12, 272, 10)}
