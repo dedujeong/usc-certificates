@@ -163,8 +163,8 @@ function renderPeriodTable(data: CertificateData, config: PeriodTableConfig, per
         displayValue !== null
           ? `<td style="border-right:${border}; text-align:center;">${displayValue}</td>
              <td style="border-right:${border};">${translateNumberToWords(displayValue)}</td>
-             <td>${s.observation ?? ""}</td>`
-          : `<td style="border-right:${border};"></td><td style="border-right:${border};"></td><td></td>`;
+             <td style="text-align:center;">${s.observation ?? ""}</td>`
+          : `<td style="border-right:${border};"></td><td style="border-right:${border};"></td><td style="text-align:center;"></td>`;
       return `<tr>
         <td style="padding-left:2.5mm; border-right:${border};">${escapeHtml(s.subjectName)}</td>
         ${cells}
