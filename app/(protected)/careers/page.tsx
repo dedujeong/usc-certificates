@@ -10,14 +10,17 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Paper,
   TextField,
   Typography,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { careersApi, Career } from "@/lib/api/careers";
 import { queryKeys } from "@/lib/queryKeys";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
+import StatusChip from "@/components/StatusChip";
 
 export default function CareersPage() {
   const queryClient = useQueryClient();
@@ -82,26 +85,28 @@ export default function CareersPage() {
   }
 
   const columns: GridColDef<Career>[] = [
-    { field: "id", headerName: "ID", width: 70 },
     { field: "name", headerName: "Carrera", flex: 1 },
     {
       field: "isActive",
-      headerName: "Activa",
-      width: 100,
-      renderCell: (params) => (params.value ? "Sí" : "No"),
+      headerName: "Estado",
+      width: 140,
+      renderCell: (params) => <StatusChip active={params.value} />,
     },
     {
       field: "actions",
-      headerName: "Acciones",
+      headerName: "",
       width: 220,
       sortable: false,
+      align: "right",
+      headerAlign: "right",
       renderCell: (params) => (
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Button size="small" onClick={() => openEdit(params.row)}>
+        <Box sx={{ display: "flex", gap: 1, justifyContent: "flex-end", width: "100%" }}>
+          <Button size="small" variant="outlined" onClick={() => openEdit(params.row)}>
             Editar
           </Button>
           <Button
             size="small"
+            variant="outlined"
             color={params.row.isActive ? "error" : "success"}
             onClick={() => toggleActiveMutation.mutate({ id: params.row.id, isActive: !params.row.isActive })}
           >
@@ -113,24 +118,36 @@ export default function CareersPage() {
   ];
 
   return (
-    <Container sx={{ mt: 4 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-        <Typography variant="h5">Carreras</Typography>
-        <Button variant="contained" onClick={openCreate}>
+    <Container sx={{ mt: 5, mb: 6 }}>
+      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", mb: 3 }}>
+        <Box>
+          <Typography variant="h4" component="h1">
+            Carreras
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
+            Catálogo de carreras ofrecidas por la universidad
+          </Typography>
+        </Box>
+        <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
           Nueva carrera
         </Button>
       </Box>
-      <DataGrid
-        rows={careers}
-        columns={columns}
-        loading={isLoading}
-        autoHeight
-        disableRowSelectionOnClick
-        getRowId={(row) => row.id}
-      />
+
+      <Paper elevation={0} sx={{ border: "1px solid", borderColor: "divider", overflow: "hidden" }}>
+        <DataGrid
+          rows={careers}
+          columns={columns}
+          loading={isLoading}
+          autoHeight
+          disableRowSelectionOnClick
+          getRowId={(row) => row.id}
+          rowHeight={60}
+          sx={{ border: "none" }}
+        />
+      </Paper>
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="xs">
-        <DialogTitle>{editing ? "Editar carrera" : "Nueva carrera"}</DialogTitle>
+        <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>{editing ? "Editar carrera" : "Nueva carrera"}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -141,8 +158,10 @@ export default function CareersPage() {
             onChange={(e) => setName(e.target.value)}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setDialogOpen(false)}>Cancelar</Button>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button onClick={() => setDialogOpen(false)} color="inherit">
+            Cancelar
+          </Button>
           <Button onClick={handleSubmit} variant="contained" disabled={!name.trim()}>
             Guardar
           </Button>

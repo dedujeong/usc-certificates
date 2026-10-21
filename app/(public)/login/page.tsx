@@ -36,14 +36,21 @@ export default function LoginPage() {
 
   return (
     <Container maxWidth="xs" sx={{ display: "flex", minHeight: "100vh", alignItems: "center" }}>
-      <Paper elevation={6} sx={{ p: 4, width: "100%" }}>
-        <Typography variant="h5" component="h1" gutterBottom sx={{ textAlign: "center" }}>
-          USC Certificates
+      <Paper
+        elevation={0}
+        sx={{ p: 5, width: "100%", border: "1px solid", borderColor: "divider" }}
+      >
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/usc-logo-positive.svg" alt="USC" width={44} height={44} />
+        </Box>
+        <Typography variant="h4" component="h1" gutterBottom sx={{ textAlign: "center" }}>
+          Bienvenido
         </Typography>
-        <Typography variant="body2" color="text.secondary" gutterBottom sx={{ textAlign: "center" }}>
+        <Typography variant="body2" color="text.secondary" gutterBottom sx={{ textAlign: "center", mb: 3 }}>
           Inicia sesión para continuar
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 2 }}>
+        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <TextField
             label="Correo electrónico"
             type="email"
@@ -64,7 +71,7 @@ export default function LoginPage() {
               {error}
             </Typography>
           )}
-          <Button type="submit" variant="contained" disabled={isSubmitting}>
+          <Button type="submit" variant="contained" size="large" disabled={isSubmitting} sx={{ mt: 1 }}>
             {isSubmitting ? "Entrando..." : "Entrar"}
           </Button>
         </Box>

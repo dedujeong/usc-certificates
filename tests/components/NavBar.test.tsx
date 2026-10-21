@@ -24,12 +24,12 @@ describe("NavBar role-based visibility", () => {
   it("hides the Administradores link for a plain admin", () => {
     mockUser = { id: 1, email: "admin@test.dev", role: "admin" };
     render(<NavBar />);
-    expect(screen.queryByText("ADMINISTRADORES")).not.toBeInTheDocument();
+    expect(screen.queryByText("Administradores")).not.toBeInTheDocument();
   });
 
   it("shows the Administradores link for a superAdmin", () => {
     mockUser = { id: 1, email: "super@test.dev", role: "superAdmin" };
     render(<NavBar />);
-    expect(screen.getByText("ADMINISTRADORES")).toBeInTheDocument();
+    expect(screen.getByText("Administradores")).toBeInTheDocument();
   });
 });
