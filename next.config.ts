@@ -6,6 +6,11 @@ import type { NextConfig } from "next";
 // CSR auth guard resolves), so there is no static-shell benefit to gain
 // from it, and it was flagging the auth guard's loading-state branch as an
 // unvalidated "instant navigation" segment.
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  // Produces a self-contained server bundle (.next/standalone) with only
+  // the node_modules the app actually needs, so the Docker image doesn't
+  // have to carry the full node_modules tree.
+  output: "standalone",
+};
 
 export default nextConfig;

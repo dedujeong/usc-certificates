@@ -16,5 +16,47 @@ services:
       timeout: 5s
       retries: 10
 
+  # Only needed for self-hosting the built app in Docker (see README "Deploy
+  # with Docker"). For local development, run only `postgres` (`docker
+  # compose up -d postgres`) and `npm run dev` natively — faster iteration,
+  # no rebuild per change.
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: runner
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://usc:usc_dev_password@postgres:5432/usc_certificates?schema=public
+      JWT_SECRET: ${JWT_SECRET:?Set JWT_SECRET in your environment or a .env file before deploying}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-8h}
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    profiles:
+      - prod
+
+  # One-off job: applies pending Prisma migrations against `postgres`. Uses
+  # the `builder` stage (has the full node_modules, including the `prisma`
+  # CLI, unlike the slim standalone `runner` image) — run before starting
+  # `app` on a fresh deploy or after pulling a new image with schema
+  # changes: `docker compose --profile prod run --rm migrate`.
+  migrate:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://usc:usc_dev_password@postgres:5432/usc_certificates?schema=public
+    command: ["npx", "prisma", "migrate", "deploy"]
+    profiles:
+      - prod
+
 volumes:
   usc_pg_data:
