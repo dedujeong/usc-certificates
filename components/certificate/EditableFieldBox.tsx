@@ -9,6 +9,8 @@ interface EditableFieldBoxProps {
   onClick: () => void;
   /** Layout hint: "inline" for short values (chip-like), "block" for long paragraphs. */
   variant?: "inline" | "block";
+  /** Minimum height, e.g. to make two "block" boxes read as the same size. */
+  minHeight?: number;
 }
 
 // Shared with CertificateCanvas's skeleton blocks so every box in the mock
@@ -22,7 +24,7 @@ export const MOCK_BORDER_RADIUS = "3px";
  * where, instead of a name/value row in a flat table disconnected from the
  * actual document.
  */
-export default function EditableFieldBox({ label, value, onClick, variant = "inline" }: EditableFieldBoxProps) {
+export default function EditableFieldBox({ label, value, onClick, variant = "inline", minHeight }: EditableFieldBoxProps) {
   const isEmpty = !value.trim();
 
   return (
@@ -41,6 +43,8 @@ export default function EditableFieldBox({ label, value, onClick, variant = "inl
         py: 0.4,
         width: variant === "block" ? "100%" : "auto",
         maxWidth: "100%",
+        minHeight,
+        boxSizing: "border-box",
         transition: "background-color 0.15s, border-color 0.15s",
         "&:hover": {
           backgroundColor: (t) => alpha(t.palette.secondary.main, 0.16),

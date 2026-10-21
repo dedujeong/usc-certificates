@@ -198,19 +198,42 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
           <SignatureSkeleton roleLabel="Representante legal" />
           <SignatureSkeleton roleLabel="Secretario de educación" />
 
-          <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, p: 1 }}>
+          {/* Spans the same 3 rows as Párrafo legal 1, Párrafo legal 2 and
+              the Subsecretario signature below — a grid item stretches to
+              fill its full row-span height by default, so this box's
+              bottom edge lands exactly at the Subsecretario signature
+              line without manual height math. */}
+          <Box
+            sx={{
+              gridRow: "span 3",
+              border: "1px solid",
+              borderColor: "divider",
+              borderRadius: MOCK_BORDER_RADIUS,
+              p: 1,
+            }}
+          >
             <Skeleton variant="text" width="90%" height={9} />
             <Skeleton variant="text" width="70%" height={9} />
             <Typography variant="caption" color="text.secondary" sx={{ fontSize: 9, display: "block", mt: 1 }}>
               Registro de servicios escolares
             </Typography>
           </Box>
-          <EditableFieldBox label="Párrafo legal 1" value={field("LEGAL_1")} onClick={() => onEditField("LEGAL_1")} variant="block" />
+          <EditableFieldBox
+            label="Párrafo legal 1"
+            value={field("LEGAL_1")}
+            onClick={() => onEditField("LEGAL_1")}
+            variant="block"
+            minHeight={56}
+          />
 
-          <Box />
-          <EditableFieldBox label="Párrafo legal 2" value={field("LEGAL_2")} onClick={() => onEditField("LEGAL_2")} variant="block" />
+          <EditableFieldBox
+            label="Párrafo legal 2"
+            value={field("LEGAL_2")}
+            onClick={() => onEditField("LEGAL_2")}
+            variant="block"
+            minHeight={56}
+          />
 
-          <Box />
           <SignatureSkeleton roleLabel="Subsecretario" />
         </Box>
       </PageFrame>
