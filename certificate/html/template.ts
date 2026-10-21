@@ -347,12 +347,12 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     </div>
 
     <div id="closing-signatures" style="position:absolute; left:110mm; top:285mm; width:95mm; font-family:'${FONT_FAMILY.timesNewRoman}'; font-size:10pt;">
-      <div style="text-align:center;">${escapeHtml(data.people[4].name)}</div>
+      <div style="text-align:center;">${escapeHtml([data.people[4].prefix, data.people[4].name].filter(Boolean).join(" "))}</div>
       <div style="border-bottom:0.3mm solid #000; margin:1mm 0 11mm 0;"></div>
       <div style="font-family:'${FONT_FAMILY.arial}'; font-size:8pt;">TUXTLA GUTIÉRREZ, CHIAPAS; A ______________________</div>
-      <div style="margin-top:8mm; font-family:'${FONT_FAMILY.arial}'; font-size:9pt; text-align:center;">${escapeHtml(data.people[6].charge)}</div>
-      <div style="border-bottom:0.3mm solid #000; margin:1mm 0;"></div>
-      <div style="text-align:center;">${escapeHtml(data.people[6].name)}</div>
+      <div style="border-bottom:0.3mm solid #000; margin:8mm 0 1mm 0;"></div>
+      <div style="text-align:center;">${escapeHtml([data.people[6].prefix, data.people[6].name].filter(Boolean).join(" "))}</div>
+      <div style="margin-top:1mm; font-family:'${FONT_FAMILY.arial}'; font-size:9pt; text-align:center;">${escapeHtml(data.people[6].charge)}</div>
     </div>
   `;
 
