@@ -105,6 +105,28 @@ function imageEl(src: string, x: number, y: number, w: number, h: number): strin
   return `<img src="${src}" style="position:absolute; left:${x}mm; top:${y}mm; width:${w}mm; height:${h}mm;" />`;
 }
 
+/** A plain rounded-rectangle outline box — replaces what used to be a flat background image. */
+function boxEl(x: number, y: number, w: number, h: number, radius: number): string {
+  return `<div style="position:absolute; left:${x}mm; top:${y}mm; width:${w}mm; height:${h}mm; border:0.3mm solid #000; border-radius:${radius}mm; box-sizing:border-box;"></div>`;
+}
+
+/**
+ * A rounded-rectangle box subdivided into stacked rows by horizontal
+ * dividers only (no columns) — e.g. the "REGISTRADO EN EL DEPARTAMENTO..."
+ * box, which is a single-column table. `rowHeights` must sum to `h`; the
+ * text inside each row is laid out separately via absolutely-positioned
+ * textEl/lineEl calls, same as before.
+ */
+function sectionedBoxEl(x: number, y: number, w: number, h: number, radius: number, rowHeights: number[]): string {
+  const rows = rowHeights
+    .map((rh, i) => {
+      const borderBottom = i < rowHeights.length - 1 ? "border-bottom:0.3mm solid #000;" : "";
+      return `<div style="height:${rh}mm; ${borderBottom}"></div>`;
+    })
+    .join("");
+  return `<div style="position:absolute; left:${x}mm; top:${y}mm; width:${w}mm; height:${h}mm; border:0.3mm solid #000; border-radius:${radius}mm; overflow:hidden; box-sizing:border-box;">${rows}</div>`;
+}
+
 interface PeriodTableConfig {
   title: string;
   x: number;
@@ -279,7 +301,7 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     ${renderPeriodTable(data, { title: "OCTAVO CUATRIMESTRE", x: 110, y: 10 }, 8)}
     ${ninthPeriodBlock}
 
-    ${imageEl("{{averageSquare}}", 9, averageBoxY, 96, 5)}
+    ${boxEl(9, averageBoxY, 96, 5, 2.5)}
     ${textEl("PROMEDIO GENERAL:", 10, averageTextY, 9, { bold: true })}
     ${textEl(`${averageScore}  ( ${averageScoreText} )`, 55, averageTextY, 9, { font: "timesNewRoman", bold: true })}
 
@@ -293,7 +315,7 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
   `;
 
   const page2Legal = `
-    ${imageEl("{{square}}", 110, 74, 96, 50)}
+    ${boxEl(110, 74, 96, 50, 1.3)}
     <div style="position:absolute; left:111.5mm; top:78mm; width:93mm; font-family:'${FONT_FAMILY.arial}'; font-size:10.7pt; text-align:justify; hyphens:auto;">${markupToHtml(processedLegalTop)}</div>
 
     ${textEl(data.people[3].charge, 55, 190, 9, { bold: true, align: "center", width: 60, whiteSpace: "normal", anchorAtCenter: true })}
@@ -304,7 +326,7 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     ${lineEl(110, 210, 90)}
     ${textEl(data.people[4].name, 110, 215, 10, { font: "timesNewRoman", align: "center", width: 90, whiteSpace: "normal" })}
 
-    ${imageEl("{{scholarServicesTable}}", 10, 230, 60, 95)}
+    ${sectionedBoxEl(10, 230, 60, 95, 1.3, [13.6, 44.4, 8.0, 11.0, 7.9, 10.1])}
     ${textEl("REGISTRADO EN EL DEPARTAMENTO DE SERVICIOS ESCOLARES", 40, 235.5, 8.5, { align: "center", width: 60, whiteSpace: "normal", anchorAtCenter: true })}
     ${textEl("CON Nº:", 12, 252, 10)}
     ${textEl("EN EL LIBRO:", 12, 262, 10)}
