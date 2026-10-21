@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
+import { Box, Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { GridColDef } from "@mui/x-data-grid";
 import { certificateFieldsApi, CertificateField } from "@/lib/api/certificateFields";
@@ -10,8 +10,43 @@ import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
 import PageHeader from "@/components/PageHeader";
 import DataTableCard from "@/components/DataTableCard";
+import CertificateCanvas from "@/components/certificate/CertificateCanvas";
 
 const QUERY_KEY = ["certificate-fields"];
+
+// Fields the certificate renderer actually reads (see
+// certificate/render/renderCertificate.ts / certificateDataService.ts) —
+// these are the ones shown on the simulated document canvas. Anything else
+// an admin creates is a free-form field not used by the current template,
+// listed separately below the canvas.
+const KNOWN_FIELD_NAMES = new Set([
+  "REGIMEN",
+  "TURNO",
+  "CLAVE",
+  "MODALIDAD",
+  "RVOE",
+  "VIGENCIA",
+  "SECL",
+  "LEGAL_TOP",
+  "LEGAL_1",
+  "LEGAL_2",
+]);
+
+const FIELD_LABELS: Record<string, string> = {
+  REGIMEN: "Régimen",
+  TURNO: "Turno",
+  CLAVE: "Clave",
+  MODALIDAD: "Modalidad",
+  RVOE: "RVOE (acuerdo número)",
+  VIGENCIA: "Vigente a partir del",
+  SECL: "Clave SE-CL",
+  LEGAL_TOP: "Párrafo superior del certificado",
+  LEGAL_1: "Párrafo legal 1",
+  LEGAL_2: "Párrafo legal 2",
+};
+
+const MULTILINE_FIELDS = new Set(["LEGAL_TOP", "LEGAL_1", "LEGAL_2"]);
+const DATE_FIELDS = new Set(["VIGENCIA"]);
 
 export default function CertificateFieldsPage() {
   const queryClient = useQueryClient();
@@ -27,15 +62,28 @@ export default function CertificateFieldsPage() {
     setDialogOpen(true);
   }
 
-  function openEdit(field: CertificateField) {
-    setEditing(field);
-    setForm({ name: field.name, value: field.value });
+  function openEditByName(name: string) {
+    const existing = fields.find((f) => f.name === name);
+    if (existing) {
+      setEditing(existing);
+      setForm({ name: existing.name, value: existing.value });
+    } else {
+      // Known field not created yet (shouldn't happen after seeding, but
+      // handle it gracefully instead of silently doing nothing).
+      setEditing(null);
+      setForm({ name, value: "" });
+    }
+    setDialogOpen(true);
+  }
+
+  function openEdit(f: CertificateField) {
+    setEditing(f);
+    setForm({ name: f.name, value: f.value });
     setDialogOpen(true);
   }
 
   const saveMutation = useMutation({
-    mutationFn: () =>
-      editing ? certificateFieldsApi.update(editing.id, form) : certificateFieldsApi.create(form),
+    mutationFn: () => (editing ? certificateFieldsApi.update(editing.id, form) : certificateFieldsApi.create(form)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
       setAlert({ message: "Guardado", severity: "success" });
@@ -53,7 +101,9 @@ export default function CertificateFieldsPage() {
     onError: (err) => setAlert({ message: err instanceof ApiError ? err.message : "Error al eliminar", severity: "error" }),
   });
 
-  const columns: GridColDef<CertificateField>[] = [
+  const otherFields = fields.filter((f) => !KNOWN_FIELD_NAMES.has(f.name));
+
+  const otherColumns: GridColDef<CertificateField>[] = [
     { field: "name", headerName: "Campo", width: 220 },
     { field: "value", headerName: "Valor", flex: 1 },
     {
@@ -76,11 +126,15 @@ export default function CertificateFieldsPage() {
     },
   ];
 
+  const dialogLabel = editing ? FIELD_LABELS[editing.name] ?? editing.name : FIELD_LABELS[form.name] ?? "Nuevo campo";
+  const isMultiline = MULTILINE_FIELDS.has(form.name);
+  const isDate = DATE_FIELDS.has(form.name);
+
   return (
     <Container sx={{ mt: 2, mb: 6 }}>
       <PageHeader
         title="Campos de certificado"
-        subtitle="Textos de la plantilla del certificado (régimen, párrafos legales, etc.)"
+        subtitle="Simulación del documento — haz clic en cualquier recuadro punteado para editar ese texto"
         action={
           <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>
             Nuevo campo
@@ -88,19 +142,47 @@ export default function CertificateFieldsPage() {
         }
       />
 
-      <DataTableCard
-        rows={fields}
-        columns={columns}
-        loading={isLoading}
-        getRowId={(r) => r.id}
-        emptyLabel="No hay campos configurados todavía"
-      />
+      {isLoading ? (
+        <Typography color="text.secondary">Cargando...</Typography>
+      ) : (
+        <CertificateCanvas fields={fields} onEditField={openEditByName} />
+      )}
+
+      {otherFields.length > 0 && (
+        <Box sx={{ mt: 5 }}>
+          <Typography variant="h6" sx={{ mb: 1 }}>
+            Otros campos
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            No se usan en la plantilla actual del certificado.
+          </Typography>
+          <DataTableCard rows={otherFields} columns={otherColumns} getRowId={(r) => r.id} hideSearch emptyLabel="" />
+        </Box>
+      )}
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="sm">
-        <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>{editing ? "Editar campo" : "Nuevo campo"}</DialogTitle>
+        <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>{dialogLabel}</DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-          <TextField label="Nombre del campo" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} disabled={!!editing} />
-          <TextField label="Valor" value={form.value} onChange={(e) => setForm({ ...form, value: e.target.value })} multiline minRows={2} />
+          <TextField
+            label="Nombre del campo"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            disabled={!!editing || KNOWN_FIELD_NAMES.has(form.name)}
+          />
+          <TextField
+            label="Valor"
+            type={isDate ? "date" : "text"}
+            value={form.value}
+            onChange={(e) => setForm({ ...form, value: e.target.value })}
+            multiline={isMultiline}
+            minRows={isMultiline ? 4 : undefined}
+            InputLabelProps={isDate ? { shrink: true } : undefined}
+            helperText={
+              form.name === "LEGAL_TOP"
+                ? "Puedes usar {totalSubjects}, {totalSubjectsText}, {dd}, {monthName}, {yyyy} — se reemplazan al generar el certificado."
+                : undefined
+            }
+          />
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3 }}>
           <Button onClick={() => setDialogOpen(false)} color="inherit">
