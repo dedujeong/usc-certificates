@@ -12,7 +12,21 @@ function getBrowser(): Promise<Browser> {
   if (!browserPromise) {
     browserPromise = puppeteer.launch({
       headless: true,
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      // --disable-dev-shm-usage avoids crashes in Docker, where /dev/shm is
+      // small by default rather than sized for Chromium's usual needs.
+      // --disable-crash-reporter: Chromium's crashpad handler needs a
+      // writable database directory, which the Docker image's unprivileged
+      // system user doesn't have a $HOME for — not needed for a headless
+      // PDF renderer anyway.
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-crash-reporter",
+      ],
+      // In Docker, Puppeteer's own Chromium download is skipped and the
+      // Debian `chromium` package is used instead (see Dockerfile).
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
     });
   }
   return browserPromise;
