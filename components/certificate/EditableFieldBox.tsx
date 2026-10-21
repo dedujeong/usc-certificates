@@ -11,6 +11,10 @@ interface EditableFieldBoxProps {
   variant?: "inline" | "block";
 }
 
+// Shared with CertificateCanvas's skeleton blocks so every box in the mock
+// (editable or not) reads as part of the same document, not two styles.
+export const MOCK_BORDER_RADIUS = "3px";
+
 /**
  * A clickable box standing in for one editable CertificateField, placed
  * inside the simulated certificate layout (see CertificateCanvas). Shows
@@ -29,12 +33,12 @@ export default function EditableFieldBox({ label, value, onClick, variant = "inl
         flexDirection: "column",
         gap: 0.25,
         cursor: "pointer",
-        borderRadius: "3px",
-        border: "1.5px dashed",
+        borderRadius: MOCK_BORDER_RADIUS,
+        border: "1px solid",
         borderColor: (t) => alpha(t.palette.secondary.main, 0.6),
         backgroundColor: (t) => alpha(t.palette.secondary.main, 0.08),
-        px: 1.25,
-        py: 0.5,
+        px: 1,
+        py: 0.4,
         width: variant === "block" ? "100%" : "auto",
         maxWidth: "100%",
         transition: "background-color 0.15s, border-color 0.15s",
@@ -47,14 +51,14 @@ export default function EditableFieldBox({ label, value, onClick, variant = "inl
     >
       <Typography
         variant="caption"
-        sx={{ fontSize: 10, fontWeight: 700, letterSpacing: 0.4, color: "secondary.main", textTransform: "uppercase" }}
+        sx={{ fontSize: 9, fontWeight: 700, letterSpacing: 0.3, color: "secondary.main", textTransform: "uppercase" }}
       >
         {label}
       </Typography>
       <Box sx={{ display: "flex", alignItems: "flex-start", gap: 0.5 }}>
         <Typography
-          variant="body2"
           sx={{
+            fontSize: 10.5,
             fontWeight: 600,
             color: isEmpty ? "text.secondary" : "text.primary",
             fontStyle: isEmpty ? "italic" : "normal",
@@ -65,7 +69,7 @@ export default function EditableFieldBox({ label, value, onClick, variant = "inl
         >
           {isEmpty ? "Sin definir" : value}
         </Typography>
-        <EditIcon className="edit-affordance" sx={{ fontSize: 14, opacity: 0, mt: 0.3, color: "secondary.main", flexShrink: 0 }} />
+        <EditIcon className="edit-affordance" sx={{ fontSize: 12, opacity: 0, mt: 0.2, color: "secondary.main", flexShrink: 0 }} />
       </Box>
     </Box>
   );

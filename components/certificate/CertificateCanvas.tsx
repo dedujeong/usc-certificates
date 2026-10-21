@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Paper, Skeleton, Typography, Divider } from "@mui/material";
-import EditableFieldBox from "./EditableFieldBox";
+import EditableFieldBox, { MOCK_BORDER_RADIUS } from "./EditableFieldBox";
 import { CertificateField } from "@/lib/api/certificateFields";
 
 interface CertificateCanvasProps {
@@ -18,7 +18,7 @@ function fieldValue(fields: CertificateField[], name: string): string {
 
 function PeriodTableSkeleton({ label }: { label: string }) {
   return (
-    <Box sx={{ border: "1px solid", borderColor: "text.secondary", borderRadius: "2px", p: 1, flex: 1, minWidth: 0 }}>
+    <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, p: 1, flex: 1, minWidth: 0 }}>
       <Skeleton variant="text" width="70%" height={14} />
       <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5, mt: 0.5 }}>
         {[1, 2, 3].map((i) => (
@@ -56,7 +56,7 @@ function PageFrame({ label, children }: { label: string; children: React.ReactNo
         sx={{
           border: "1px solid",
           borderColor: "divider",
-          borderRadius: "2px",
+          borderRadius: MOCK_BORDER_RADIUS,
           p: { xs: 1.75, sm: 2.25 },
           width: PAGE_WIDTH,
           height: PAGE_HEIGHT,
@@ -105,7 +105,7 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
 
         {/* School name / address block */}
         <Box sx={{ display: "flex", gap: 1.5 }}>
-          <Skeleton variant="rounded" width={46} height={60} sx={{ flexShrink: 0, borderRadius: "2px" }} />
+          <Skeleton variant="rounded" width={46} height={60} sx={{ flexShrink: 0, borderRadius: MOCK_BORDER_RADIUS }} />
           <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 0.75 }}>
             <Box sx={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 0.75 }}>
               <Typography variant="caption" color="text.secondary" sx={{ fontSize: 9 }}>
@@ -156,7 +156,7 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
             <Box sx={{ flex: 1, minHeight: 0 }}>
               <PeriodTableSkeleton label="7º cuatrimestre" />
             </Box>
-            <Box sx={{ border: "1px solid", borderColor: "text.secondary", borderRadius: "2px", px: 1, py: 0.5 }}>
+            <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, px: 1, py: 0.5 }}>
               <Typography variant="caption" sx={{ fontSize: 9, fontWeight: 700 }}>
                 PROMEDIO GENERAL:
               </Typography>
@@ -164,7 +164,7 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
             </Box>
             <SignatureSkeleton roleLabel="Director general" />
             <SignatureSkeleton roleLabel="Representante legal" />
-            <Box sx={{ border: "1px solid", borderColor: "text.secondary", borderRadius: "2px", p: 1, flex: 1, minHeight: 0 }}>
+            <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, p: 1, flex: 1, minHeight: 0 }}>
               <Skeleton variant="text" width="90%" height={9} />
               <Skeleton variant="text" width="70%" height={9} />
               <Typography variant="caption" color="text.secondary" sx={{ fontSize: 9, display: "block", mt: 1 }}>
