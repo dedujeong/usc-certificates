@@ -80,7 +80,7 @@ export default function DataTableCard<T extends { id: number | string }>({
         hideFooter
         sx={{
           border: "none",
-          "& .MuiDataGrid-cell": { px: 2.5 },
+          "& .MuiDataGrid-cell": { px: 2.5, display: "flex", alignItems: "center" },
           "& .MuiDataGrid-columnHeader": { px: 2.5 },
           "& .MuiDataGrid-columnHeaders": { borderBottom: "1px solid", borderColor: "divider" },
           ...dataGridProps.sx,
