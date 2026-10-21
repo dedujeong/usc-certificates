@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Box, Button, Container, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Container, IconButton, MenuItem, TextField, Tooltip, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import GradeIcon from "@mui/icons-material/Grade";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
 import { studentsApi, Student } from "@/lib/api/students";
+import { studentCareersApi } from "@/lib/api/studentCareers";
+import { careersApi } from "@/lib/api/careers";
 import { queryKeys } from "@/lib/queryKeys";
 import { ApiError } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
@@ -22,7 +24,25 @@ export default function StudentsPage() {
     queryKey: queryKeys.students,
     queryFn: studentsApi.list,
   });
+  const { data: studentCareers = [] } = useQuery({
+    queryKey: ["student-careers"],
+    queryFn: studentCareersApi.list,
+  });
+  const { data: careers = [] } = useQuery({ queryKey: queryKeys.careers, queryFn: careersApi.list });
   const [alert, setAlert] = useState<{ message: string; severity: "success" | "error" } | null>(null);
+  const [careerFilter, setCareerFilter] = useState("");
+
+  const activeCareerByStudentId = useMemo(() => {
+    const map = new Map<number, { id: number; name: string }>();
+    for (const sc of studentCareers) {
+      if (sc.isActive && sc.career) map.set(sc.studentId, { id: sc.career.id, name: sc.career.name });
+    }
+    return map;
+  }, [studentCareers]);
+
+  const filteredStudents = careerFilter
+    ? students.filter((s) => activeCareerByStudentId.get(s.id)?.id === Number(careerFilter))
+    : students;
 
   const toggleActiveMutation = useMutation({
     mutationFn: ({ id, isActive }: { id: number; isActive: boolean }) =>
@@ -50,6 +70,17 @@ export default function StudentsPage() {
             {[params.row.paternalName, params.row.maternalName].filter(Boolean).join(" ")}
           </Typography>
         </Box>
+      ),
+    },
+    {
+      field: "career",
+      headerName: "Carrera",
+      flex: 1.2,
+      valueGetter: (_, row) => activeCareerByStudentId.get(row.id)?.name ?? "",
+      renderCell: (params) => (
+        <Typography variant="body2" color={params.value ? "text.primary" : "text.secondary"}>
+          {params.value || "Sin inscripción"}
+        </Typography>
       ),
     },
     {
@@ -101,12 +132,31 @@ export default function StudentsPage() {
           </Button>
         }
       />
+
+      <Box sx={{ display: "flex", gap: 1.5, mb: 2, flexWrap: "wrap" }}>
+        <TextField
+          select
+          size="small"
+          label="Carrera"
+          value={careerFilter}
+          onChange={(e) => setCareerFilter(e.target.value)}
+          sx={{ minWidth: 260 }}
+        >
+          <MenuItem value="">Todas las carreras</MenuItem>
+          {careers.map((c) => (
+            <MenuItem key={c.id} value={c.id}>
+              {c.name}
+            </MenuItem>
+          ))}
+        </TextField>
+      </Box>
+
       <DataTableCard
-        rows={students}
+        rows={filteredStudents}
         columns={columns}
         loading={isLoading}
         getRowId={(r) => r.id}
-        emptyLabel="No hay alumnos registrados todavía"
+        emptyLabel="No hay alumnos que coincidan con el filtro"
       />
       {alert && <AlertMessage open={!!alert} message={alert.message} severity={alert.severity} onClose={() => setAlert(null)} />}
     </Container>
