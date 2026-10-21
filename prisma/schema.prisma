@@ -1,0 +1,164 @@
+// Prisma schema for USC Certificates
+// Bounded contexts (see governance/architecture/domain-model.md in the old repo):
+// identity (User, Admin), shared kernel (Person), academic_catalog (Career, Subject),
+// student_records (Student, StudentCareer, Score), certification (CertificateField)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---------- identity ----------
+
+enum Role {
+  admin
+  superAdmin
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  role         Role     @default(admin)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  admin        Admin?
+
+  @@map("users")
+}
+
+model Admin {
+  id           Int      @id @default(autoincrement())
+  firstName    String
+  paternalName String?
+  maternalName String?
+  userId       Int      @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admins")
+}
+
+// ---------- shared kernel: certificate signatories ----------
+
+enum Gender {
+  male
+  female
+}
+
+model Person {
+  id     Int     @id @default(autoincrement())
+  prefix String?
+  name   String
+  charge String
+  gender Gender
+
+  @@map("people")
+}
+
+// ---------- academic_catalog ----------
+
+model Career {
+  id             Int             @id @default(autoincrement())
+  name           String          @unique
+  isActive       Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  subjects       Subject[]
+  studentCareers StudentCareer[]
+
+  @@map("careers")
+}
+
+model Subject {
+  id        Int      @id @default(autoincrement())
+  careerId  Int
+  career    Career   @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  name      String
+  period    Int
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  scores    Score[]
+
+  @@index([careerId])
+  @@map("subjects")
+}
+
+// ---------- certification ----------
+
+model CertificateField {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  value String
+
+  @@map("certificate_fields")
+}
+
+// ---------- student_records ----------
+
+model Student {
+  id             Int             @id @default(autoincrement())
+  tuition        Int             @unique
+  firstName      String
+  paternalName   String?
+  maternalName   String?
+  isActive       Boolean         @default(true)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  studentCareers StudentCareer[]
+  scores         Score[]
+
+  @@map("students")
+}
+
+// NOTE: the "only one active enrollment per student" rule is enforced by a
+// partial unique index added in a hand-edited migration (see
+// prisma/migrations/*_student_careers_one_active/migration.sql), not by a
+// Prisma-level @@unique, because Prisma's declarative schema cannot express
+// a partial (WHERE isActive) unique index portably.
+model StudentCareer {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  careerId  Int
+  career    Career   @relation(fields: [careerId], references: [id], onDelete: Cascade)
+  startDate DateTime @db.Date
+  endDate   DateTime @db.Date
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([studentId])
+  @@map("student_careers")
+}
+
+enum ScoreObservation {
+  EX
+  TS
+  EQ
+  REC
+}
+
+model Score {
+  id          Int               @id @default(autoincrement())
+  studentId   Int
+  student     Student           @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subjectId   Int
+  subject     Subject           @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  value       Decimal           @db.Decimal(3, 1)
+  observation ScoreObservation?
+  isActive    Boolean           @default(true)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@unique([studentId, subjectId])
+  @@map("scores")
+}

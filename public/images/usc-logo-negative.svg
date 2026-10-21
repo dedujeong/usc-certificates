@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 12.67">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ffffff;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="consulta">
+    <g>
+      <path class="cls-1" d="m11.62,2.84h-1v7.8l-2.02,2.02H3.01l-2.02-2.02V2.84h-.99V0h5.38v2.84h-.91v6.57l.41.4h1.86l.4-.4V2.84h-.91V0h5.4v2.84Z"/>
+      <path class="cls-1" d="m21.55,2.02v2.4h-3.27v-1.17l-.4-.41h-1.87l-.41.41v1.19l.41.41h3.6l2.02,2.02v3.77l-2.02,2.02h-5.58l-2.02-2.02v-2.52h3.27v1.29l.41.4h2.07l.4-.4v-1.31l-.4-.41h-3.62l-2.02-2.02v-3.65l2.02-2.02h5.38l2.02,2.02Z"/>
+      <path class="cls-1" d="m32,2.02v2.84h-3.28v-1.61l-.4-.41h-2.05l-.41.41v6.16l.41.4h2.05l.4-.4v-1.52h3.28v2.75l-2.02,2.02h-5.58l-2.02-2.02V2.02l2.02-2.02h5.58l2.02,2.02Z"/>
+    </g>
+  </g>
+</svg>
