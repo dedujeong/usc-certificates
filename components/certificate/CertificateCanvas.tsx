@@ -186,7 +186,7 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
             <Skeleton variant="text" width="50%" height={9} />
           </Box>
           <EditableFieldBox
-            label="Párrafo superior (LEGAL_TOP)"
+            label="Párrafo superior del certificado"
             value={field("LEGAL_TOP")}
             onClick={() => onEditField("LEGAL_TOP")}
             variant="block"

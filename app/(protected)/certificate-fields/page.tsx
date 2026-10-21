@@ -179,12 +179,18 @@ export default function CertificateFieldsPage() {
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="sm">
         <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>{dialogLabel}</DialogTitle>
         <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 1 }}>
-          <TextField
-            label="Nombre del campo"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            disabled={!!editing || KNOWN_FIELD_NAMES.has(form.name)}
-          />
+          {/* The technical field name (e.g. LEGAL_TOP) is only useful for
+              a brand-new custom field — for a known field it's redundant
+              with the friendly dialogLabel already in the title, and
+              showing it disabled just exposed the raw identifier. */}
+          {!KNOWN_FIELD_NAMES.has(form.name) && (
+            <TextField
+              label="Nombre del campo"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              disabled={!!editing}
+            />
+          )}
           {isLegalText ? (
             <LegalTextField
               value={form.value}

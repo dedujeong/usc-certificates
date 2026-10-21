@@ -108,6 +108,11 @@ export default function LegalTextField({ value, onChange, placeholders }: LegalT
           borderRadius: "14px",
           border: "1px solid",
           borderColor: "divider",
+          // Native <textarea> elements don't inherit `color` from ancestors
+          // the way regular elements do — without this it fell back to the
+          // browser's default form-control text color, which read as
+          // white-on-white in light mode.
+          color: "text.primary",
           backgroundColor: (t) => (t.palette.mode === "dark" ? "rgba(255,255,255,0.03)" : "rgba(28,27,23,0.02)"),
           resize: "vertical",
           "&:focus": { outline: "none", borderColor: "secondary.main" },
