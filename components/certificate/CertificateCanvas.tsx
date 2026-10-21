@@ -162,23 +162,35 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
 
           {/* 9º cuatrimestre only applies to careers whose catalog reaches
               a 9th period (see hasNinthPeriod in renderCertificate.ts) —
-              shown here so the mock reflects the most space-constrained
-              real case instead of the simpler common one. */}
+              stacked under 8º on the right, same column, so the mock
+              reflects the most space-constrained real case. */}
+          <Box />
           <PeriodTableSkeleton label="9º cuatrimestre (si aplica)" />
+
+          {/* Promedio general sits to the left of LEGAL_TOP, top-aligned
+              with it (alignSelf: "start") rather than stretched to match
+              its height. */}
+          <Box
+            sx={{
+              alignSelf: "start",
+              border: "1px solid",
+              borderColor: "divider",
+              borderRadius: MOCK_BORDER_RADIUS,
+              px: 1,
+              py: 0.5,
+            }}
+          >
+            <Typography variant="caption" sx={{ fontSize: 9, fontWeight: 700 }}>
+              PROMEDIO GENERAL:
+            </Typography>
+            <Skeleton variant="text" width="50%" height={9} />
+          </Box>
           <EditableFieldBox
             label="Párrafo superior (LEGAL_TOP)"
             value={field("LEGAL_TOP")}
             onClick={() => onEditField("LEGAL_TOP")}
             variant="block"
           />
-
-          <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, px: 1, py: 0.5 }}>
-            <Typography variant="caption" sx={{ fontSize: 9, fontWeight: 700 }}>
-              PROMEDIO GENERAL:
-            </Typography>
-            <Skeleton variant="text" width="50%" height={9} />
-          </Box>
-          <Box />
 
           <SignatureSkeleton roleLabel="Director general" />
           <SignatureSkeleton roleLabel="Director académico" />
