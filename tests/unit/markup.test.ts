@@ -1,57 +1,26 @@
 import { describe, it, expect } from "vitest";
-import { drawFormattedText } from "@/certificate/render/markup";
+import { markupToHtml } from "@/certificate/html/markup";
 import { translateAverageToWords, numberToSpanishWords, splitDateUpper } from "@/certificate/render/helpers";
 
-// Minimal fake jsPDF: enough to exercise drawFormattedText's tokenizing,
-// wrapping and bold/underline handling without a real PDF canvas. Records
-// every text() call so assertions can check what actually got rendered.
-function createFakeDoc() {
-  const calls: { text: string; x: number; y: number }[] = [];
-  const lines: { x1: number; y1: number; x2: number; y2: number }[] = [];
-  let currentFont = { family: "Arial", style: "normal" };
-
-  return {
-    calls,
-    lines,
-    setFont(family: string, style: string) {
-      currentFont = { family, style };
-    },
-    getTextWidth(text: string) {
-      // Fixed-width approximation: enough to make wrapping deterministic.
-      return text.length * 2;
-    },
-    text(text: string, x: number, y: number) {
-      calls.push({ text, x, y });
-    },
-    line(x1: number, y1: number, x2: number, y2: number) {
-      lines.push({ x1, y1, x2, y2 });
-    },
-  };
-}
-
-describe("certificate markup engine (drawFormattedText)", () => {
-  it("renders bold segments marked with *asterisks*", () => {
-    const doc = createFakeDoc();
-    drawFormattedText(doc as never, "normal *bold* normal", 0, 0, 1000, 5);
-
-    const rendered = doc.calls.map((c) => c.text).join("");
-    expect(rendered).toContain("bold");
-    expect(rendered).toContain("normal");
+describe("certificate markup (markupToHtml)", () => {
+  it("renders *bold* segments as <strong>", () => {
+    expect(markupToHtml("normal *bold* normal")).toBe("normal <strong>bold</strong> normal");
   });
 
-  it("draws an underline for segments marked with _underscores_", () => {
-    const doc = createFakeDoc();
-    drawFormattedText(doc as never, "_underlined_", 0, 0, 1000, 5);
-
-    expect(doc.lines.length).toBeGreaterThan(0);
+  it("renders _underline_ segments as <u>", () => {
+    expect(markupToHtml("_underlined_")).toBe("<u>underlined</u>");
   });
 
-  it("wraps to a new line when content exceeds maxWidth", () => {
-    const doc = createFakeDoc();
-    const finalY = drawFormattedText(doc as never, "one two three four five six seven", 0, 0, 20, 5);
+  it("handles mixed bold and underline in the same string", () => {
+    expect(markupToHtml("*bold* and _underlined_")).toBe("<strong>bold</strong> and <u>underlined</u>");
+  });
 
-    // Multiple lines means the Y cursor advanced beyond the starting line.
-    expect(finalY).toBeGreaterThan(0);
+  it("escapes HTML-significant characters so stored text can't inject markup", () => {
+    expect(markupToHtml("A & B <script>")).toBe("A &amp; B &lt;script&gt;");
+  });
+
+  it("leaves plain text untouched", () => {
+    expect(markupToHtml("plain text")).toBe("plain text");
   });
 });
 

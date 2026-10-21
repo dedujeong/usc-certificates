@@ -4,8 +4,7 @@ import { use, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
 import { fetchCertificateData } from "@/certificate/fetchCertificateData";
-import { renderCertificate } from "@/certificate/render/renderCertificate";
-import { ApiError } from "@/lib/api/apiClient";
+import { ApiError, apiFetchBlob } from "@/lib/api/apiClient";
 import AlertMessage from "@/components/AlertMessage";
 
 export default function StudentCertificatePage({ params }: { params: Promise<{ id: string }> }) {
@@ -26,10 +25,21 @@ export default function StudentCertificatePage({ params }: { params: Promise<{ i
     if (!data) return;
     setIsGenerating(true);
     try {
-      await renderCertificate({ ...data, certificateNumber, exp });
+      const { blob, filename } = await apiFetchBlob(`/api/certificate/pdf/${studentId}`, {
+        method: "POST",
+        body: JSON.stringify({ certificateNumber, exp }),
+      });
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename ?? `${exp}-${data.studentTuition}-CER-AQ.pdf`;
+      a.click();
+      URL.revokeObjectURL(url);
+
       setAlert({ message: "Certificado generado", severity: "success" });
     } catch (err) {
-      setAlert({ message: err instanceof Error ? err.message : "Error al generar el certificado", severity: "error" });
+      setAlert({ message: err instanceof ApiError ? err.message : "Error al generar el certificado", severity: "error" });
     } finally {
       setIsGenerating(false);
     }
