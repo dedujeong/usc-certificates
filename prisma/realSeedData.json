@@ -1,0 +1,2237 @@
+{
+  "careers": [
+    "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+    "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+    "LICENCIATURA EN ARQUITECTURA",
+    "LICENCIATURA EN CONTADURIA PUBLICA",
+    "LICENCIATURA EN DERECHO",
+    "LICENCIATURA EN DISEÑO GRÁFICO",
+    "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+    "LICENCIATURA EN TRABAJO SOCIAL"
+  ],
+  "subjects": [
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "INTRODUCCION A LA INGENIERIA EN SISTEMAS COMPUTACIONALES",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "CONTABILIDAD",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "FUNDAMENTOS DE INVESTIGACION",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ALGORITMOS COMPUTACIONALES",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "FISICA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "MATEMATICAS I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "INGENIERIA ECONOMICA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PROBABILIDAD Y ESTADISTICA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PROGRAMACION I",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "MATEMATICAS DISCRETAS",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ELECTRICIDAD Y MAGNETISMO",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "MATEMATICAS II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ESTRUCTURAS DE DATOS",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "LENGUAJE ENSAMBLADOR",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ESTADISTICA APLICADA",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PROGRAMACION II",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ADMINISTRACION DE ARCHIVOS",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "CIRCUITOS ELECTRICOS Y ELECTRONICOS",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "MATEMATICAS III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ARQUITECTURA DE COMPUTADORAS I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "INVESTIGACION DE OPERACIONES I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "TEORIA DE LA COMPUTACION",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PROGRAMACION III",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PROGRAMACION DE INTERFACES",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PARADIGMAS Y LENGUAS DE PROGRAMA",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "MATEMATICAS IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ARQUITECTURA DE COMPUTADORAS II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "INVESTIGACION DE OPERACIONES II",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "BASE DE DATOS I",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PROGRAMACION DE SISTEMAS",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "TEORIA DE SISTEMAS OPERATIVOS",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "TELEMATICA",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "MATEMATICAS V",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "COMPILADORES",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "SIMULACION",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "BASE DE DATOS II",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ADMINISTRACION DE PROYECTOS INFORMATICOS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "SISTEMAS OPERATIVOS MODERNOS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "REDES I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "MATEMATICAS VI",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ANALISIS Y DISEÑO DE SISTEMAS I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "INTELIGENCIA ARTIFICIAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "AUDITORIA INFORMATICA",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ADMINISTRACION DE CENTROS DE COMPUTO",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "SEMINARIO I",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "REDES II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "ANALISIS Y DISEÑO DE SISTEMAS II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "REDES NEURALES",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "BASE DE DATOS DISTRIBUIDAS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "PROGRAMACION DE PAGINAS WEB",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "SEMINARIO II",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "LOGICA DIFUSA",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+      "name": "INGENIERIA DE SOFTWARE",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "CONTABILIDAD I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "INFORMATICA BASICA I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "MATEMATICAS BASICAS",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "NOCIONES DE DERECHO",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "SOCIOLOGIA DE LA ORGANIZACIÓN",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "METODOLOGIA DE LA INVESTIGACION",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "CONTABILIDAD II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "INFORMATICA BASICA II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "MATEMATICAS FINANCIERAS",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "DERECHO MERCANTIL",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "MACROECONOMIA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "DESARROLLO DE LIDERES EMPRENDEDORES",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "CONTABILIDAD III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "INFORMATICA BASICA III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ESTADISTICA I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "DERECHO DEL TRABAJO",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "MICROECONOMIA",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "INTRODUCCION AL TURISMO",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "CONTABILIDAD IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION DE RECURSOS HUMANOS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "COSTOS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ESTADISTICA II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ETICA DE LOS NEGOCIOS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "MERCADOTECNIA",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "PRESUPUESTOS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "PERSONAL I",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "DESARROLLO DEL CAPITAL HUMANO",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "FINANZAS I",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "INVESTIGACION DE OPERACIONES",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION DEL SECTOR PUBLICO",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "MERCADOTECNIA II",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "PERSONAL II",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADQUISICION Y ABASTECIMIENTO",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "FINANZAS II",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "OPERACIONES I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "PROCEDIMENTOS FISCALES BASICOS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "MERCADOTECNIA III",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION DE MICRO Y PEQUEÑAS EMPRESAS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "PERSONAL III",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "DESARROLLO ORGANIZACIONAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "FINANZAS III",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "OPERACIONES II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "SEGURO SOCIAL, INFONAVIT, SAR",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION DE VENTAS",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "CREACION DE EMPRESAS",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "PSICOLOGIA DEL TRABAJO",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "AUDITORIA ADMINISTRATIVA",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "ADMINISTRACION PARA LA CALIDAD TOTAL",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "INNOVACIONES TECNICAS DE LA ADMINISTRACION",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS",
+      "name": "PLANEACION ESTRATEGICA",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ALGEBRA SUPERIOR I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "METODOLOGIA Y ARQUITECTURA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TEORIA DE LA ARQUITECTURA I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TALLER DE REPRESENTACION GRAFICA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "HISTORIA DE LA ARQUITECTURA I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "GEOMETRIA DESCRIPTIVA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ALGEBRA SUPERIOR II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ESTATICA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TEORIA DE LA ARQUITECTURA II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TOPOGRAFIA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "HISTORIA DE LA ARQUITECTURA II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "PERSPECTIVA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ALGEBRA SUPERIOR III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "RESISTENCIA DE MATERIALES I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "RESTAURACION DE MONUMENTOS HISTORICOS I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "MATERIALES Y PROCESOS DE CONSTRUCCION I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "HISTORIA DE LA ARQUITECTURA III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "PERSPECTIVA II",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "INSTALACIONES DE EDIFICIOS I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "RESISTENCIA DE MATERIALES II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "RESTAURACION DE MONUMENTOS HISTORICOS II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "MATERIALES Y PROCESOS DE CONSTRUCCION II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "HISTORIA DE LA ARQUITECTURA IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "CONFORT AMBIENTAL",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO V",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "INSTALACIONES DE EDIFICIOS II",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "CONCRETO I",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "RESTAURACION DE MONUMENTOS HISTORICOS III",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "MATERIALES Y PROCESOS DE CONSTRUCCION III",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "HISTORIA DE LA ARQUITECTURA V",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ADMINISTRACION DE OBRA",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO VI",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "URBANISMO I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "CONCRETO II",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ESTRUCTURAS I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TALLER DE CONSTRUCION I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "HISTORIA DE LA ARQUITECTURA VI",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "INTRODUCCION A LOS SISTEMAS DE COMPUTO",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO VII",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "URBANISMO II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "PSICOLOGIA AMBIENTAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ESTRUCTURAS II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TALLER DE CONSTRUCCION II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ANALISIS CRITICO DE LA ARQUITECTURA",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO ASISTIDO POR COMPUTADORA I",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO VIII",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ARQUITECTURA DEL PAISAJE",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TALLER INTEGRAL",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "ESTRUCTURAS III",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "TALLER DE CONSTRUCCION III",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "REGENERACION URBANO AMBIENTAL Y DE IMAGEN URBANO",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN ARQUITECTURA",
+      "name": "DISEÑO ASISTIDO POR COMPUTADORA II",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTABILIDAD I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "ADMINISTRACION BASICA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONCEPTOS JURIDICOS FUNDAMENTALES",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "INFORMATICA BASICA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "MACROECONOMIA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "MATEMATICAS FINANCIERAS",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTABILIDAD II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "RECURSOS HUMANOS",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "DERECHO MERCANTIL",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "PRINCIPIOS Y TECNICAS DE LA INVESTIGACION",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "MICROECONOMIA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "ESTADISTICA I",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTABILIDAD III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "OPERACIONES",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "DERECHO LABORAL",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "COSTOS I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "FINANZAS I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "ESTADISTICA II",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTABILIDAD IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "DERECHO FISCAL",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "DEFENSA FISCAL Y PROCEDIMIENTOS ADMINISTRATIVOS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "COSTOS II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "FINANZAS II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "ORDENAMIENTOS FISCALES",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTROL DE GESTION",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTABILIDAD INTERMEDIA",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "AUDITORIA I",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "PRESUPUESTOS",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "ORGANIZACIÓN CONTABLE",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "FINANZAS III",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "REGIMEN GENERAL DE EMPRESAS ISR",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "SISTEMA DE CONTROL INTERNO",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "PRINCIPIOS DE CONTABILIDAD EN EL SISTEMA FINANCIERO",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "AUDITORIA II",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "AUDITORIA INTERNA",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTRIBUCIONES INDIRECTAS AL COMERCIO EXTERIOR",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CASOS DE FINANZAS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "PERSONAS FISICAS CON ACTIVIDAD EMPRESARIAL",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "SEGURIDAD SOCIAL",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONSOLIDACION DE ESTADOS FINANCIEROS",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "AUDITORIA III",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "CONTRALORIA",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "COSTOS PARA LA TOMA DE DECISIONES",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "INFORMATICA FISCAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "PERSONAS FISICAS CON ACTIVIDADES NO EMPRESARIAS",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "PRACTICAS DE CONTABILIDAD",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "TALLER DE AUDITORIA Y DICTAMENES FISCALES",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "REFORMAS FISCALES RECIENTES",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "ETICA EN LAS ORGANIZACIONES",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "PERSONAS MORALES CON FINES NO LUCRATIVOS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "REGIMEN SIMPLIFICADO ISR",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN CONTADURIA PUBLICA",
+      "name": "SEMINARIO DE JUEGO DE NEGOCIOS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "INTRODUCCION AL ESTUDIO DEL DERECHO",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO MERCANTIL",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PENAL",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "ACTO JURIDICO Y PERSONAS",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "HISTORIA DEL DERECHO MEXICANO",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO ROMANO I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "METODOLOGIA DE LA INVESTIGACION JURIDICA",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "ETICA JURIDICA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "SOCIEDADES MERCANTILES",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "TEORIA DEL DELITO",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "BIENES Y DERECHOS REALES",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO CONSTITUCIONAL",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO ROMANO II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO ELECTORAL",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO ADMINISTRATIVO I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "TITULOS DE CREDITO",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DELITOS EN PARTICULAR Y ESPECIALES",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "OBLIGACIONES",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHOS HUMANOS Y SUS GARANTIAS",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO INDIVIDUAL DEL TRABAJO",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "TALLER DE REDACCION JURIDICA",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO ADMINISTRATIVO II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "OPERACIONES DE CREDITO",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PROCESAL PENAL",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "CONTRATOS CIVILES",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "AMPARO I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO COLECTIVO DEL TRABAJO",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "ARGUMENTACION JURIDICA",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PROCESAL ADMINISTRATIVO",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "CONTRATOS MERCANTILES",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "ETAPA PRELIMINAR",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO FAMILIAR",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "AMPARO II",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO A LA SEGURIDAD SOCIAL",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO INTERNACIONAL PUBLICO",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO NOTARIAL Y REGISTRAL",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "JUICIO EJECUTIVO MERCANTIL",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "ETAPA INTERMEDIA",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO SUCESORIO",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "FISCAL I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PROCESAL DEL TRABAJO",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO INTERNACIONAL PRIVADO",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO EMPRESARIAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "JUICIO ORAL MERCANTIL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "ETAPA DEL JUICIO ORAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PROCESAL CIVIL I",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "FISCAL II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "CRIMINALISTICA",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO AGRARIO",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PENITENCIARIO Y EJECUCION DE SENTENCIAS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "TECNICAS DE EXPRESION",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "TALLER DE LITIGACION EN JUICIO ORAL",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PROCESAL CIVIL II",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "PROCESOS Y PROCEDIMIENTOS FISCALES",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "MEDICINA LEGAL",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DERECHO",
+      "name": "DERECHO PROCESAL AGRARIO",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TEORIA DEL DISEÑO I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TALLER DE DISEÑO I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "INTRODUCCION A LA COMUNICACIÓN",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "ESTRUCTURAS BASICAS PARA EL DIBUJO",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "METODOS DE REPRODUCCION I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "INTRODUCCION A LOS MEDIOS IMPRESOS",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "HISTORIA DEL ARTE Y DEL DISEÑO",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TEORIA DEL DISEÑO II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TALLER DE DISEÑO II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "COMUNICACIÓN I",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "VOLUMEN DE DIBUJO",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "METODOS DE REPRODUCCION II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TIPOGRAFIA I",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "GEOMETRIA Y DESCRIPTIVA",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TEORIA DEL DISEÑO III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "DISEÑO DE EMPAQUES",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "COMUNICACIÓN II",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "DIBUJO DEL CUERPO HUMANO",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "METODOS DE REPRODUCCION III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TIPOGRAFIA II",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "PERSPECTIVA",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TEORIA DEL DISEÑO IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "DISEÑO DE ENVASE",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "COMUNICACIÓN AUDIOVISUAL",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TECNICAS DE REPRESENTACION I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "COMPUTACION GRAFICA I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "FOTOGRAFIA I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "ADMINISTRACION DEL DISEÑO",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "ESTETICA",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "IMAGEN CORPORATIVA",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "ILUSTRACION",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TECNICAS DE REPRESENTACION",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "COMPUTACION GRAFICA II",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "FOTOGRAFIA II",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "CONTABILIDAD Y FINANZAS PARA EL DISEÑO",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "MERCADOTECNIA Y PUBLICIDAD",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "CARTEL",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "DIBUJO DE ANIMACION",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TECNICAS DE REPRESENTACION III",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "COMPUTACION GRAFICA III",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "MEDIOS DE DIFUSION",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "SEÑALETICA",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "DISEÑO EDITORIAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "ORGANIZACIÓN Y PRODUCCION GRAFICA I",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "METODOLOGIA DE LA INVESTIGACION",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "COMPUTACION GRAFICA IV",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "MEDIOS AUDIOVISUALES",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "DESARROLLO DE CAMPAÑAS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "DISEÑO DE INTERIORES",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "ORGANIZACIÓN Y PRODUCCION GRAFICA II",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "PAGINAS WEB",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "TALLER DE REALIZACION",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN DISEÑO GRÁFICO",
+      "name": "PROYECTO TERMINAL",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "CONTABILIDAD I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ADMINISTRACION I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INFORMATICA BASICA I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MATEMATICAS BASICAS",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "NOCIONES DE DERECHO",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "METODOLOGIA DE LA INVESTIGACION",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "CONTABILIDAD II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ADMINISTRACION II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INFORMATICA BASICA II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MATEMATICAS FINANCIERAS",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "DERECHO MERCANTIL",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "SOCIOLOGIA DE LA ORGANIZACIÓN",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "CONTABILIDAD III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ADMINISTRACION III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INFORMATICA BASICA III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ESTADISTICA I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "DERECHO DEL TRABAJO",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MACROECONOMIA",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "DESARROLLO DE LIDERES EMPRENDEDORES",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "CONTABILIDAD IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ADMINISTRACION DE RECURSOS HUMANOS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "COSTOS I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ESTADISTICA II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "CREACION DE EMPRESAS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MICROECONOMIA",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ETICA DE LOS NEGOCIOS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INTRODUCCION A LA PROGRAMACION",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MATEMATICAS AVANZADAS I",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "PROGRAMACION DE INTERFACES",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ESTRUCTURA DE DATOS Y ORGANIZACION DE ARCHIVOS",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INVESTIGACION DE OPERACIONES",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INFORMATICA IV",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "PROGRAMACION DE SISTEMAS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MATEMATICAS AVANZADAS II",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "BASE DE DATOS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "DIRECCION",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "SISTEMAS DE INFORMACION I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INFORMATICA V",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "TELECOMUNICACIONES I",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MATEMATICAS AVANZADAS III",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "LABORATORIO DE BASE DE DATOS",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ORGANIZACIÓN DE COMPUTADORAS I",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "SISTEMAS DE INFORMACION II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ADMINISTRACION DE CENTROS DE COMPUTO",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "TELECOMUNICACIONES II",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "MATEMATICAS AVANZADAS IV",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "SIMULACION DE SISTEMAS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ORGANIZACIÓN DE COMPUTADORAS II",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ANALISIS Y DISEÑO DE SISTEMAS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "INTELIGENCIA ARTIFICIAL",
+      "period": 9
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "AUDITORIA EN INFORMATICA",
+      "period": 9
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "ADMINISTRACION PUBLICA Y POLITICA INFORMATICA",
+      "period": 9
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "SISTEMAS OPERATIVOS",
+      "period": 9
+    },
+    {
+      "careerName": "LICENCIATURA EN INFORMÁTICA ADMINISTRATIVA",
+      "name": "LABORATORIO DE SISTEMAS",
+      "period": 9
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "COMPUTACIÓN I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ESTADISTICA I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "FILOSOFIA I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "GEOHISTORIA CONTEMPORÁNEA DE MÉXICO",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ANTROPOLOGÍA I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "COMUNICACIÓN I",
+      "period": 1
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "COMPUTACIÓN II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ESTADISTICA II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "FILOSOFIA II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ANALISIS SOCIOECONOMICO Y POLITICO DE MEXICO",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ANTROPOLOGIA II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "COMUNICACIÓN II",
+      "period": 2
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "COMPUTACIÓN III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ESTADISTICA III",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PRINCIPIOS GENERALES DEL DERECHO",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "CULTURAS INDIGENAS DE LA ENTIDAD I",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "GEOHISTORIA DE CHIAPAS",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE TÉCNICAS DE ENSEÑANZA",
+      "period": 3
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PRACTICAS DE TRABAJO SOCIAL I",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ESTADISTICA IV",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "DERECHO CONSTITUCIONAL",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "CULTURAS INDIGENAS DE LA ENTIDAD II",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ANALISIS SOCIOECONOMICO Y POLITICO DE CHIAPAS",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE ELABORACION DE MATERIAL DIDACTICO",
+      "period": 4
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL V",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PRACTICAS DE TRABAJO SOCIAL II",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "ADMINISTRACION",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "DERECHOS HUMANOS",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PSICOLOGIA SOCIAL",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "NOCIONES DE LA SALUD PÚBLICA",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE LECTURA Y REDACIÓN I",
+      "period": 5
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL VI",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PRACTICAS DE TRABAJO SOCIAL III",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE ADMINISTRACIÓN DE PROYECTOS",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "DERECHO CIVIL FAMILIAR",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "EDUCACIÓN REPRODUCTIVA",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE LECTURA Y REDACCIÓN II",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE INVESTIGACIÓN SOCIAL I",
+      "period": 6
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL VII",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PRACTICAS DE TRABAJO SOCIAL IV",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE GRUPOS OPERATIVOS",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "DERECHO AGRARIO",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PSICOPATOLOGIA Y SALUD MENTAL",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "EDUCACIÓN NUTRICIONAL I",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TALLER DE INVESTIGACIÓN SOCIAL II",
+      "period": 7
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "TRABAJO SOCIAL VIII",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "PRACTICAS DE TRABAJO SOCIAL V",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "DEÓNTOLOGIA DEL TRABAJO SOCIAL",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "DERECHO LABORAL",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "RELACIONES HUMANAS",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "EDUCACION NUTRICIONAL II",
+      "period": 8
+    },
+    {
+      "careerName": "LICENCIATURA EN TRABAJO SOCIAL",
+      "name": "COOPERATIVISMO",
+      "period": 8
+    }
+  ],
+  "certificateFields": {
+    "REGIMEN": "PARTICULAR",
+    "TURNO": "MIXTO",
+    "CLAVE": "07PSU0063R",
+    "MODALIDAD": "MIXTA",
+    "RVOE": "PSU-156/2019",
+    "VIGENCIA": "2019-10-03",
+    "SECL": "SE-CL-25",
+    "LEGAL_1": "EN CUMPLIMIENTO AL *ARTÍCULO 31*, *FRACCIÓN IX*, DE LA LEY ORGÁNICA DE LA ADMINISTRACIÓN PÚBLICA DEL ESTADO DE CHIAPAS, *27 FRACCIÓN XX* DEL REGLAMENTO INTERIOR DE LA SECRETARÍA GENERAL DE GOBIERNO. LA COORDINACIÓN DE ASUNTOS JURÍDICOS DE GOBIERNO DEL ESTADO",
+    "LEGAL_2": "*LEGALIZA*, PREVIO COTEJO CON LA EXISTENTE EN EL CONTROL RESPECTIVO QUE EL AUTÓGRAFO QUE ANTECEDE CORRESPONDE A LA DIRECTORA DE EDUCACIÓN SUPERIOR.",
+    "LEGAL_TOP": "La escala oficial de calificaciones es de 0 (CERO) a 10 (DIEZ), considerando como mínima aprobatoria 6 (SEIS). Este certificado ampara {totalSubjects} ({totalSubjectsText}) materias del plan de estudios vigente y en cumplimiento a las prescripciones legales, se extiende el presente, en la ciudad de San Cristóbal de Las Casas, Chiapas, a los _{dd}_ días del mes de _{monthName}_ de _{yyyy}_.",
+    "SCHOOL_NAME": "SAN CRISTÓBAL",
+    "SCHOOL_CITY": "SAN CRISTÓBAL DE LAS CASAS, CHIAPAS"
+  },
+  "people": [
+    {
+      "prefix": "LIC.",
+      "name": "LISBETH SÁNCHEZ CÓRDOVA",
+      "charge": "RESPONSABLE DE SERVICIOS ESCOLARES DE LA UNIVERSIDAD",
+      "gender": "female"
+    },
+    {
+      "prefix": "MTRO.",
+      "name": "CARLOS BORROMEO GONZÁLEZ GONZÁLEZ",
+      "charge": "RECTOR DE LA UNIVERSIDAD",
+      "gender": "male"
+    },
+    {
+      "prefix": "LIC.",
+      "name": "JONATÁN HERNÁNDEZ ROQUE",
+      "charge": "JEFE DEL DEPARTAMENTO DE SERVICIOS ESCOLARES",
+      "gender": "male"
+    },
+    {
+      "prefix": "MTRA.",
+      "name": "ROSA LAURA VÁZQUEZ GRAJALES",
+      "charge": "DIRECTORA DE EDUCACIÓN SUPERIOR",
+      "gender": "female"
+    },
+    {
+      "prefix": "MTRO.",
+      "name": "MANUEL CASTILLEJOS LÓPEZ",
+      "charge": "JEFE DE LA OFICINA",
+      "gender": "male"
+    },
+    {
+      "prefix": "MTRO.",
+      "name": "JOSÉ FRANCISCO GÓMEZ CALCÁNEO",
+      "charge": "COORDINADOR DE ASUNTOS JURÍDICOS DE GOBIERNO DE LA SECRETARÍA GENERAL DE GOBIERNO Y MEDIACIÓN.",
+      "gender": "female"
+    },
+    {
+      "prefix": "LIC.",
+      "name": "SEGUNDO SALDAÑA VAZQUEZ",
+      "charge": "COTEJO",
+      "gender": "male"
+    }
+  ]
+}
