@@ -111,42 +111,52 @@ interface PeriodTableConfig {
   y: number;
 }
 
+// Column widths traced from the old table.png background image (now
+// replaced by a real <table> — see renderPeriodTable): title/subject-name
+// column, Cifra, Letra, Observaciones, summing to the 96mm box width.
+const PERIOD_TABLE_COLS = [55.4, 9.84, 10.26, 20.4] as const;
+
 function renderPeriodTable(data: CertificateData, config: PeriodTableConfig, period: number): string {
   const { title, x, y } = config;
   const subjects = data.subjectScores.filter((s) => s.period === period);
-
-  const header = [
-    imageEl("{{table}}", x, y, 96, 60),
-    textEl(title, x + 11, y + 7, 10, { font: "arialNarrow" }),
-    // The old jsPDF version used ArialNarrow for this header (narrower than
-    // the regular Arial these were defaulting to), which is why it fit
-    // without colliding into the OBSERVACIONES column.
-    textEl("CALIFICACIÓN", x + 56.5, y + 4, 9, { font: "arialNarrow" }),
-    textEl("Cifra", x + 57.5, y + 9, 9, { font: "arialNarrow" }),
-    textEl("Letra", x + 67.5, y + 9, 9, { font: "arialNarrow" }),
-    textEl("OBSERVA-", x + 85, y + 2, 10, { align: "center", font: "arialNarrow" }),
-    textEl("CIONES", x + 85, y + 6.5, 10, { align: "center", font: "arialNarrow" }),
-  ].join("");
+  const narrow = FONT_FAMILY.arialNarrow;
+  const border = "0.3mm solid #000";
 
   const rows = subjects
     .map((s) => {
-      const parts = [
-        `<div style="flex:0 0 52mm; font-family:'${FONT_FAMILY.arialNarrow}'; font-size:9.5pt; line-height:1.25;">${escapeHtml(s.subjectName)}</div>`,
-      ];
-      if (s.value !== null) {
-        parts.push(
-          `<div style="flex:0 0 12mm; text-align:center; font-size:9.5pt;">${s.value}</div>`,
-          `<div style="flex:0 0 16mm; font-size:9.5pt;">${translateNumberToWords(s.value)}</div>`,
-          `<div style="flex:0 0 14mm; font-size:9.5pt;">${s.observation ?? ""}</div>`,
-        );
-      }
-      return `<div style="display:flex; align-items:flex-end; gap:0; margin-bottom:0.6mm;">${parts.join("")}</div>`;
+      const cells =
+        s.value !== null
+          ? `<td style="border-right:${border}; text-align:center;">${s.value}</td>
+             <td style="border-right:${border};">${translateNumberToWords(s.value)}</td>
+             <td>${s.observation ?? ""}</td>`
+          : `<td style="border-right:${border};"></td><td style="border-right:${border};"></td><td></td>`;
+      return `<tr>
+        <td style="padding-left:2.5mm; border-right:${border};">${escapeHtml(s.subjectName)}</td>
+        ${cells}
+      </tr>`;
     })
     .join("");
 
-  const body = `<div style="position:absolute; left:${x}mm; top:${y + 15}mm; width:94mm;">${rows}</div>`;
-
-  return header + body;
+  return `
+    <div style="position:absolute; left:${x}mm; top:${y}mm; width:96mm; height:60mm; border:${border}; border-radius:1.3mm; overflow:hidden; box-sizing:border-box;">
+      <table style="width:100%; height:100%; border-collapse:collapse; table-layout:fixed; font-family:'${narrow}'; font-size:9.5pt;">
+        <colgroup>
+          ${PERIOD_TABLE_COLS.map((w) => `<col style="width:${w}mm;">`).join("")}
+        </colgroup>
+        <tbody>
+          <tr style="height:7.5mm;">
+            <td rowspan="2" style="padding-left:2.5mm; border-right:${border}; border-bottom:${border}; font-size:10pt; vertical-align:middle;">${escapeHtml(title)}</td>
+            <td colspan="2" style="border-right:${border}; border-bottom:${border}; font-size:9pt; text-align:center; vertical-align:middle;">CALIFICACIÓN</td>
+            <td rowspan="2" style="border-bottom:${border}; font-size:10pt; text-align:center; vertical-align:middle; line-height:1.15;">OBSERVA-<br/>CIONES</td>
+          </tr>
+          <tr style="height:3.8mm;">
+            <td style="border-right:${border}; border-bottom:${border}; font-size:9pt; text-align:center; vertical-align:middle;">Cifra</td>
+            <td style="border-right:${border}; border-bottom:${border}; font-size:9pt; text-align:center; vertical-align:middle;">Letra</td>
+          </tr>
+          ${rows}
+        </tbody>
+      </table>
+    </div>`;
 }
 
 export async function buildCertificateHtml(data: CertificateData): Promise<string> {

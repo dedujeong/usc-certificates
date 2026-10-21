@@ -31,7 +31,6 @@ export const FONT_FILES = {
 export const IMAGE_FILES = {
   logoMX: "certificate-assets/logo-mx.png",
   pictureSize: "certificate-assets/picture-size.png",
-  table: "certificate-assets/table.png",
   square: "certificate-assets/square.png",
   averageSquare: "certificate-assets/average-square.png",
   scholarServicesTable: "certificate-assets/scholar-services-table.png",
