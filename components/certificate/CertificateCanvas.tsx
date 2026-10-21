@@ -150,52 +150,56 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
       </PageFrame>
 
       <PageFrame label="Página 2">
-        <Box sx={{ display: "flex", gap: 1.5, flex: 1, minHeight: 0 }}>
-          {/* Left column */}
-          <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1.25, minWidth: 0 }}>
-            <Box sx={{ flex: 1, minHeight: 0 }}>
-              <PeriodTableSkeleton label="7º cuatrimestre" />
-            </Box>
-            <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, px: 1, py: 0.5 }}>
-              <Typography variant="caption" sx={{ fontSize: 9, fontWeight: 700 }}>
-                PROMEDIO GENERAL:
-              </Typography>
-              <Skeleton variant="text" width="50%" height={9} />
-            </Box>
-            <SignatureSkeleton roleLabel="Director general" />
-            <SignatureSkeleton roleLabel="Representante legal" />
-            <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, p: 1, flex: 1, minHeight: 0 }}>
-              <Skeleton variant="text" width="90%" height={9} />
-              <Skeleton variant="text" width="70%" height={9} />
-              <Typography variant="caption" color="text.secondary" sx={{ fontSize: 9, display: "block", mt: 1 }}>
-                Registro de servicios escolares
-              </Typography>
-            </Box>
-          </Box>
+        {/* A real 2-column grid (not two independently-flowing flex
+            columns) so each row's height is the max of both cells —
+            that's what keeps the two signature rows aligned regardless of
+            how tall LEGAL_TOP/LEGAL_1/LEGAL_2 happen to be. Gap matches
+            the Página 1 table grid (gap: 1) instead of the looser spacing
+            this used to have. */}
+        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 1, alignContent: "start" }}>
+          <PeriodTableSkeleton label="7º cuatrimestre" />
+          <PeriodTableSkeleton label="8º cuatrimestre" />
 
-          {/* Right column — includes a 9º cuatrimestre block (only shown
-              for careers whose catalog reaches a 9th period, see
-              hasNinthPeriod in renderCertificate.ts) so the mock reflects
-              the most space-constrained case admins will actually hit. */}
-          <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1.25, minWidth: 0 }}>
-            <Box sx={{ flex: 1, minHeight: 0 }}>
-              <PeriodTableSkeleton label="8º cuatrimestre" />
-            </Box>
-            <Box sx={{ flex: 1, minHeight: 0 }}>
-              <PeriodTableSkeleton label="9º cuatrimestre (si aplica)" />
-            </Box>
-            <EditableFieldBox
-              label="Párrafo superior (LEGAL_TOP)"
-              value={field("LEGAL_TOP")}
-              onClick={() => onEditField("LEGAL_TOP")}
-              variant="block"
-            />
-            <SignatureSkeleton roleLabel="Director académico" />
-            <SignatureSkeleton roleLabel="Secretario de educación" />
-            <EditableFieldBox label="Párrafo legal 1" value={field("LEGAL_1")} onClick={() => onEditField("LEGAL_1")} variant="block" />
-            <EditableFieldBox label="Párrafo legal 2" value={field("LEGAL_2")} onClick={() => onEditField("LEGAL_2")} variant="block" />
-            <SignatureSkeleton roleLabel="Subsecretario" />
+          {/* 9º cuatrimestre only applies to careers whose catalog reaches
+              a 9th period (see hasNinthPeriod in renderCertificate.ts) —
+              shown here so the mock reflects the most space-constrained
+              real case instead of the simpler common one. */}
+          <PeriodTableSkeleton label="9º cuatrimestre (si aplica)" />
+          <EditableFieldBox
+            label="Párrafo superior (LEGAL_TOP)"
+            value={field("LEGAL_TOP")}
+            onClick={() => onEditField("LEGAL_TOP")}
+            variant="block"
+          />
+
+          <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, px: 1, py: 0.5 }}>
+            <Typography variant="caption" sx={{ fontSize: 9, fontWeight: 700 }}>
+              PROMEDIO GENERAL:
+            </Typography>
+            <Skeleton variant="text" width="50%" height={9} />
           </Box>
+          <Box />
+
+          <SignatureSkeleton roleLabel="Director general" />
+          <SignatureSkeleton roleLabel="Director académico" />
+
+          <SignatureSkeleton roleLabel="Representante legal" />
+          <SignatureSkeleton roleLabel="Secretario de educación" />
+
+          <Box sx={{ border: "1px solid", borderColor: "divider", borderRadius: MOCK_BORDER_RADIUS, p: 1 }}>
+            <Skeleton variant="text" width="90%" height={9} />
+            <Skeleton variant="text" width="70%" height={9} />
+            <Typography variant="caption" color="text.secondary" sx={{ fontSize: 9, display: "block", mt: 1 }}>
+              Registro de servicios escolares
+            </Typography>
+          </Box>
+          <EditableFieldBox label="Párrafo legal 1" value={field("LEGAL_1")} onClick={() => onEditField("LEGAL_1")} variant="block" />
+
+          <Box />
+          <EditableFieldBox label="Párrafo legal 2" value={field("LEGAL_2")} onClick={() => onEditField("LEGAL_2")} variant="block" />
+
+          <Box />
+          <SignatureSkeleton roleLabel="Subsecretario" />
         </Box>
       </PageFrame>
     </Box>
