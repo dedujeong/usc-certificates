@@ -155,10 +155,14 @@ function renderPeriodTable(data: CertificateData, config: PeriodTableConfig, per
 
   const rows = subjects
     .map((s) => {
+      // Individual grades can be stored with one decimal (e.g. 8.5), but
+      // the table only ever displays the whole number — the decimal only
+      // factors into the "PROMEDIO GENERAL" average below.
+      const displayValue = s.value !== null ? Math.round(s.value) : null;
       const cells =
-        s.value !== null
-          ? `<td style="border-right:${border}; text-align:center;">${s.value}</td>
-             <td style="border-right:${border};">${translateNumberToWords(s.value)}</td>
+        displayValue !== null
+          ? `<td style="border-right:${border}; text-align:center;">${displayValue}</td>
+             <td style="border-right:${border};">${translateNumberToWords(displayValue)}</td>
              <td>${s.observation ?? ""}</td>`
           : `<td style="border-right:${border};"></td><td style="border-right:${border};"></td><td></td>`;
       return `<tr>

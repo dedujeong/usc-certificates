@@ -71,7 +71,7 @@ export default function StudentScoresPage({ params }: { params: Promise<{ id: st
             size="small"
             type="number"
             slotProps={{ htmlInput: { min: 0, max: 10, step: 0.1 } }}
-            defaultValue={existing?.value ?? ""}
+            defaultValue={existing ? Math.round(Number(existing.value)) : ""}
             onBlur={(e) =>
               e.target.value &&
               upsertMutation.mutate({ subjectId: params.row.id, value: e.target.value, observation: existing?.observation ?? "" })
@@ -120,7 +120,7 @@ export default function StudentScoresPage({ params }: { params: Promise<{ id: st
               <Typography variant="caption" color="text.secondary" display="block">
                 Promedio general
               </Typography>
-              <Chip label={average} color="secondary" sx={{ fontSize: 18, px: 1, height: 36 }} />
+              <Chip label={average.toFixed(1)} color="secondary" sx={{ fontSize: 18, px: 1, height: 36 }} />
             </Box>
           ) : undefined
         }
