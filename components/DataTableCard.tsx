@@ -1,10 +1,19 @@
 "use client";
 
 import { Box, Paper, Typography } from "@mui/material";
+import { ReactNode } from "react";
 import SearchOffIcon from "@mui/icons-material/SearchOff";
 import { DataGrid, DataGridProps, GridToolbarQuickFilter, GridPagination } from "@mui/x-data-grid";
 
-function TableToolbar({ hideSearch, hidePagination }: { hideSearch: boolean; hidePagination: boolean }) {
+function TableToolbar({
+  hideSearch,
+  hidePagination,
+  filters,
+}: {
+  hideSearch: boolean;
+  hidePagination: boolean;
+  filters?: ReactNode;
+}) {
   return (
     <Box
       sx={{
@@ -19,16 +28,17 @@ function TableToolbar({ hideSearch, hidePagination }: { hideSearch: boolean; hid
         borderColor: "divider",
       }}
     >
-      {hideSearch ? (
-        <Box />
-      ) : (
-        <GridToolbarQuickFilter
-          placeholder="Buscar..."
-          variant="outlined"
-          size="small"
-          sx={{ width: 280, "& .MuiInputBase-root": { borderRadius: 999 } }}
-        />
-      )}
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, flexWrap: "wrap" }}>
+        {!hideSearch && (
+          <GridToolbarQuickFilter
+            placeholder="Buscar..."
+            variant="outlined"
+            size="small"
+            sx={{ width: 240, "& .MuiInputBase-root": { borderRadius: 999 } }}
+          />
+        )}
+        {filters}
+      </Box>
       {!hidePagination && (
         <GridPagination
           sx={{
@@ -57,16 +67,19 @@ interface DataTableCardProps<T extends { id: number | string }> extends Omit<Dat
   emptyLabel?: string;
   /** Hides the built-in search box, e.g. for very short lists. */
   hideSearch?: boolean;
+  /** Extra filter controls (e.g. Selects) rendered in the same toolbar row, next to the search box. */
+  filters?: ReactNode;
 }
 
 export default function DataTableCard<T extends { id: number | string }>({
   emptyLabel = "No hay registros todavía",
   hideSearch = false,
   hideFooter = false,
+  filters,
   rowHeight = 60,
   ...dataGridProps
 }: DataTableCardProps<T>) {
-  const hideToolbar = hideSearch && hideFooter;
+  const hideToolbar = hideSearch && hideFooter && !filters;
 
   return (
     <Paper elevation={0} sx={{ border: "1px solid", borderColor: "divider", overflow: "hidden" }}>
@@ -86,7 +99,9 @@ export default function DataTableCard<T extends { id: number | string }>({
           ...dataGridProps.sx,
         }}
         slots={{
-          toolbar: hideToolbar ? undefined : () => <TableToolbar hideSearch={hideSearch} hidePagination={hideFooter} />,
+          toolbar: hideToolbar
+            ? undefined
+            : () => <TableToolbar hideSearch={hideSearch} hidePagination={hideFooter} filters={filters} />,
           noRowsOverlay: () => <EmptyState label={emptyLabel} />,
         }}
       />

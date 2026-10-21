@@ -133,30 +133,29 @@ export default function StudentsPage() {
         }
       />
 
-      <Box sx={{ display: "flex", gap: 1.5, mb: 2, flexWrap: "wrap" }}>
-        <TextField
-          select
-          size="small"
-          label="Carrera"
-          value={careerFilter}
-          onChange={(e) => setCareerFilter(e.target.value)}
-          sx={{ minWidth: 260 }}
-        >
-          <MenuItem value="">Todas las carreras</MenuItem>
-          {careers.map((c) => (
-            <MenuItem key={c.id} value={c.id}>
-              {c.name}
-            </MenuItem>
-          ))}
-        </TextField>
-      </Box>
-
       <DataTableCard
         rows={filteredStudents}
         columns={columns}
         loading={isLoading}
         getRowId={(r) => r.id}
         emptyLabel="No hay alumnos que coincidan con el filtro"
+        filters={
+          <TextField
+            select
+            size="small"
+            label="Carrera"
+            value={careerFilter}
+            onChange={(e) => setCareerFilter(e.target.value)}
+            sx={{ minWidth: 220, "& .MuiInputBase-root": { borderRadius: 999 } }}
+          >
+            <MenuItem value="">Todas las carreras</MenuItem>
+            {careers.map((c) => (
+              <MenuItem key={c.id} value={c.id}>
+                {c.name}
+              </MenuItem>
+            ))}
+          </TextField>
+        }
       />
       {alert && <AlertMessage open={!!alert} message={alert.message} severity={alert.severity} onClose={() => setAlert(null)} />}
     </Container>

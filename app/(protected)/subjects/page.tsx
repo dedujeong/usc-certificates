@@ -130,45 +130,46 @@ export default function SubjectsPage() {
         }
       />
 
-      <Box sx={{ display: "flex", gap: 1.5, mb: 2, flexWrap: "wrap" }}>
-        <TextField
-          select
-          size="small"
-          label="Carrera"
-          value={careerFilter}
-          onChange={(e) => setCareerFilter(e.target.value)}
-          sx={{ minWidth: 220 }}
-        >
-          <MenuItem value="">Todas las carreras</MenuItem>
-          {careers.map((c) => (
-            <MenuItem key={c.id} value={c.id}>
-              {c.name}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          select
-          size="small"
-          label="Periodo"
-          value={periodFilter}
-          onChange={(e) => setPeriodFilter(e.target.value)}
-          sx={{ minWidth: 160 }}
-        >
-          <MenuItem value="">Todos los periodos</MenuItem>
-          {Array.from({ length: 9 }, (_, i) => i + 1).map((p) => (
-            <MenuItem key={p} value={p}>
-              {p}º cuatrimestre
-            </MenuItem>
-          ))}
-        </TextField>
-      </Box>
-
       <DataTableCard
         rows={filteredSubjects}
         columns={columns}
         loading={isLoading}
         getRowId={(r) => r.id}
         emptyLabel="No hay materias que coincidan con el filtro"
+        filters={
+          <>
+            <TextField
+              select
+              size="small"
+              label="Carrera"
+              value={careerFilter}
+              onChange={(e) => setCareerFilter(e.target.value)}
+              sx={{ minWidth: 200, "& .MuiInputBase-root": { borderRadius: 999 } }}
+            >
+              <MenuItem value="">Todas las carreras</MenuItem>
+              {careers.map((c) => (
+                <MenuItem key={c.id} value={c.id}>
+                  {c.name}
+                </MenuItem>
+              ))}
+            </TextField>
+            <TextField
+              select
+              size="small"
+              label="Periodo"
+              value={periodFilter}
+              onChange={(e) => setPeriodFilter(e.target.value)}
+              sx={{ minWidth: 150, "& .MuiInputBase-root": { borderRadius: 999 } }}
+            >
+              <MenuItem value="">Todos los periodos</MenuItem>
+              {Array.from({ length: 9 }, (_, i) => i + 1).map((p) => (
+                <MenuItem key={p} value={p}>
+                  {p}º cuatrimestre
+                </MenuItem>
+              ))}
+            </TextField>
+          </>
+        }
       />
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} fullWidth maxWidth="xs">
