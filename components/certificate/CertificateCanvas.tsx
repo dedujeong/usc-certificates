@@ -173,10 +173,16 @@ export default function CertificateCanvas({ fields, onEditField }: CertificateCa
             </Box>
           </Box>
 
-          {/* Right column */}
+          {/* Right column — includes a 9º cuatrimestre block (only shown
+              for careers whose catalog reaches a 9th period, see
+              hasNinthPeriod in renderCertificate.ts) so the mock reflects
+              the most space-constrained case admins will actually hit. */}
           <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: 1.25, minWidth: 0 }}>
             <Box sx={{ flex: 1, minHeight: 0 }}>
-              <PeriodTableSkeleton label="8º/9º cuatrimestre (si aplica)" />
+              <PeriodTableSkeleton label="8º cuatrimestre" />
+            </Box>
+            <Box sx={{ flex: 1, minHeight: 0 }}>
+              <PeriodTableSkeleton label="9º cuatrimestre (si aplica)" />
             </Box>
             <EditableFieldBox
               label="Párrafo superior (LEGAL_TOP)"
