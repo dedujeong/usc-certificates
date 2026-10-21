@@ -126,22 +126,34 @@ export async function renderCertificate(data: CertificateData): Promise<void> {
 
   doc.addImage(pictureSize, "PNG", 9, 45, 37, 50);
 
+  // The city name used to be two hardcoded literals split across two fixed
+  // positions ("SAN CRISTÓBAL DE" / "LAS CASAS, CHIAPAS"). It's now driven
+  // by the editable SCHOOL_CITY field, so an arbitrary-length value is
+  // split roughly in half by word count across the same two lines instead
+  // — not pixel-perfect for very long names, but avoids hardcoding the
+  // literal text while keeping the rest of the page's fixed Y positions
+  // (which a full re-wrap would otherwise cascade into shifting).
+  const cityWords = data.schoolCity.split(" ").filter(Boolean);
+  const citySplitAt = Math.ceil(cityWords.length / 2);
+  const cityLine1 = cityWords.slice(0, citySplitAt).join(" ");
+  const cityLine2 = cityWords.slice(citySplitAt).join(" ");
+
   doc.setFont("Arial", "normal");
   doc.setFontSize(12);
   doc.text("LA UNIVERSIDAD", 55, 43);
   doc.setFont("Arial", "bold");
-  doc.text("«SAN CRISTÓBAL»", 91, 43);
+  doc.text(`«${data.schoolName}»`, 91, 43);
   doc.setFont("Arial", "normal");
   doc.setFontSize(9);
   doc.text("UBICADO EN LA CIUDAD DE", 131, 43);
   doc.setFont("Arial", "bold");
-  doc.text("SAN CRISTÓBAL DE ", 175, 43);
+  doc.text(cityLine1, 175, 43);
   doc.setFont("Arial", "normal");
-  doc.text("__________________", 175, 43.5);
+  addTextWithUnderscores(doc, cityLine1, 175, 43.5, 0);
   doc.setFont("Arial", "bold");
-  doc.text("LAS CASAS, CHIAPAS", 55, 50);
+  doc.text(cityLine2, 55, 50);
   doc.setFont("Arial", "normal");
-  doc.text("____________________", 55, 50.5);
+  addTextWithUnderscores(doc, cityLine2, 55, 50.5, 0);
   doc.text("RÉGIMEN", 114, 50);
   doc.setFont("Arial", "bold");
   doc.text(`${data.regimen},`, 130, 50);
@@ -321,7 +333,7 @@ export async function renderCertificate(data: CertificateData): Promise<void> {
     doc.text(`${averageScore}  ( ${averageScoreText} )`, 55, 140.5);
 
     doc.setFont("Arial", "bold");
-    doc.text(`${data.people[1].charge} «SAN CRISTÓBAL»`, 55, 152, { maxWidth: 60, align: "center" });
+    doc.text(`${data.people[1].charge} «${data.schoolName}»`, 55, 152, { maxWidth: 60, align: "center" });
     doc.text("____________________________________________________", 10, 174);
     doc.setFont("TimesNewRoman", "normal");
     doc.setFontSize(10);
@@ -329,7 +341,7 @@ export async function renderCertificate(data: CertificateData): Promise<void> {
 
     doc.setFont("Arial", "bold");
     doc.setFontSize(9);
-    doc.text(`${data.people[2].charge} «SAN CRISTÓBAL»`, 155, 152, { maxWidth: 50, align: "center" });
+    doc.text(`${data.people[2].charge} «${data.schoolName}»`, 155, 152, { maxWidth: 50, align: "center" });
     doc.text("____________________________________________________", 110, 174);
     doc.setFont("TimesNewRoman", "normal");
     doc.setFontSize(10);
@@ -344,7 +356,7 @@ export async function renderCertificate(data: CertificateData): Promise<void> {
     doc.text(`${averageScore}  ( ${averageScoreText} )`, 55, 77.5);
 
     doc.setFont("Arial", "bold");
-    doc.text(`${data.people[1].charge} «SAN CRISTÓBAL»`, 55, 140, { maxWidth: 60, align: "center" });
+    doc.text(`${data.people[1].charge} «${data.schoolName}»`, 55, 140, { maxWidth: 60, align: "center" });
     doc.text("____________________________________________________", 10, 160);
     doc.setFont("TimesNewRoman", "normal");
     doc.setFontSize(10);
@@ -352,7 +364,7 @@ export async function renderCertificate(data: CertificateData): Promise<void> {
 
     doc.setFont("Arial", "bold");
     doc.setFontSize(9);
-    doc.text(`${data.people[2].charge} «SAN CRISTÓBAL»`, 155, 140, { maxWidth: 50, align: "center" });
+    doc.text(`${data.people[2].charge} «${data.schoolName}»`, 155, 140, { maxWidth: 50, align: "center" });
     doc.text("____________________________________________________", 110, 160);
     doc.setFont("TimesNewRoman", "normal");
     doc.setFontSize(10);

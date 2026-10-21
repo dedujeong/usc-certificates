@@ -29,7 +29,7 @@ export default function EditableFieldBox({ label, value, onClick, variant = "inl
         flexDirection: "column",
         gap: 0.25,
         cursor: "pointer",
-        borderRadius: 2,
+        borderRadius: "3px",
         border: "1.5px dashed",
         borderColor: (t) => alpha(t.palette.secondary.main, 0.6),
         backgroundColor: (t) => alpha(t.palette.secondary.main, 0.08),

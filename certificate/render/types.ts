@@ -21,6 +21,8 @@ export interface CertificateSubjectScore {
  * of rendering, mixing data access with layout.
  */
 export interface CertificateData {
+  schoolName: string;
+  schoolCity: string;
   regimen: string;
   turno: string;
   clave: string;

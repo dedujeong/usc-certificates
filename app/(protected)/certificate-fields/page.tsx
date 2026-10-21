@@ -20,6 +20,8 @@ const QUERY_KEY = ["certificate-fields"];
 // an admin creates is a free-form field not used by the current template,
 // listed separately below the canvas.
 const KNOWN_FIELD_NAMES = new Set([
+  "SCHOOL_NAME",
+  "SCHOOL_CITY",
   "REGIMEN",
   "TURNO",
   "CLAVE",
@@ -33,6 +35,8 @@ const KNOWN_FIELD_NAMES = new Set([
 ]);
 
 const FIELD_LABELS: Record<string, string> = {
+  SCHOOL_NAME: "Nombre de la universidad",
+  SCHOOL_CITY: "Ciudad",
   REGIMEN: "Régimen",
   TURNO: "Turno",
   CLAVE: "Clave",

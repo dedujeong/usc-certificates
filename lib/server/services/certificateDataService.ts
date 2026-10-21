@@ -3,6 +3,8 @@ import { NotFoundError } from "@/lib/server/http";
 import { CertificateData, CertificatePerson } from "@/certificate/render/types";
 
 const FIELD_NAMES = [
+  "SCHOOL_NAME",
+  "SCHOOL_CITY",
   "REGIMEN",
   "TURNO",
   "CLAVE",
@@ -56,6 +58,8 @@ export async function buildCertificateData(studentId: number): Promise<Omit<Cert
   });
 
   return {
+    schoolName: fieldMap.SCHOOL_NAME ?? "",
+    schoolCity: fieldMap.SCHOOL_CITY ?? "",
     regimen: fieldMap.REGIMEN ?? "",
     turno: fieldMap.TURNO ?? "",
     clave: fieldMap.CLAVE ?? "",

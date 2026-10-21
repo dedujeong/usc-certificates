@@ -40,6 +40,8 @@ async function main() {
 
   console.log("Seeding certificate fields...");
   const CERTIFICATE_FIELDS: Record<string, string> = {
+    SCHOOL_NAME: "SAN CRISTÓBAL",
+    SCHOOL_CITY: "SAN CRISTÓBAL DE LAS CASAS, CHIAPAS",
     REGIMEN: "PARTICULAR",
     TURNO: "MIXTO",
     CLAVE: "00PSU0000X",
