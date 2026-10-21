@@ -11,6 +11,7 @@ import AlertMessage from "@/components/AlertMessage";
 import PageHeader from "@/components/PageHeader";
 import DataTableCard from "@/components/DataTableCard";
 import CertificateCanvas from "@/components/certificate/CertificateCanvas";
+import LegalTextField, { LegalTextPlaceholder } from "@/components/certificate/LegalTextField";
 
 const QUERY_KEY = ["certificate-fields"];
 
@@ -51,6 +52,17 @@ const FIELD_LABELS: Record<string, string> = {
 
 const MULTILINE_FIELDS = new Set(["LEGAL_TOP", "LEGAL_1", "LEGAL_2"]);
 const DATE_FIELDS = new Set(["VIGENCIA"]);
+
+// Only LEGAL_TOP supports {placeholder} substitution (see
+// certificate/render/renderCertificate.ts's processedLegalTop); offered as
+// an "insert variable" menu instead of asking staff to type the raw token.
+const LEGAL_TOP_PLACEHOLDERS: LegalTextPlaceholder[] = [
+  { token: "{totalSubjects}", label: "Número de materias (cifra)", example: "6" },
+  { token: "{totalSubjectsText}", label: "Número de materias (texto)", example: "seis" },
+  { token: "{dd}", label: "Día de expedición", example: "21" },
+  { token: "{monthName}", label: "Mes de expedición", example: "octubre" },
+  { token: "{yyyy}", label: "Año de expedición", example: "2026" },
+];
 
 export default function CertificateFieldsPage() {
   const queryClient = useQueryClient();
@@ -131,7 +143,7 @@ export default function CertificateFieldsPage() {
   ];
 
   const dialogLabel = editing ? FIELD_LABELS[editing.name] ?? editing.name : FIELD_LABELS[form.name] ?? "Nuevo campo";
-  const isMultiline = MULTILINE_FIELDS.has(form.name);
+  const isLegalText = MULTILINE_FIELDS.has(form.name);
   const isDate = DATE_FIELDS.has(form.name);
 
   return (
@@ -173,20 +185,21 @@ export default function CertificateFieldsPage() {
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             disabled={!!editing || KNOWN_FIELD_NAMES.has(form.name)}
           />
-          <TextField
-            label="Valor"
-            type={isDate ? "date" : "text"}
-            value={form.value}
-            onChange={(e) => setForm({ ...form, value: e.target.value })}
-            multiline={isMultiline}
-            minRows={isMultiline ? 4 : undefined}
-            InputLabelProps={isDate ? { shrink: true } : undefined}
-            helperText={
-              form.name === "LEGAL_TOP"
-                ? "Puedes usar {totalSubjects}, {totalSubjectsText}, {dd}, {monthName}, {yyyy} — se reemplazan al generar el certificado."
-                : undefined
-            }
-          />
+          {isLegalText ? (
+            <LegalTextField
+              value={form.value}
+              onChange={(value) => setForm({ ...form, value })}
+              placeholders={form.name === "LEGAL_TOP" ? LEGAL_TOP_PLACEHOLDERS : undefined}
+            />
+          ) : (
+            <TextField
+              label="Valor"
+              type={isDate ? "date" : "text"}
+              value={form.value}
+              onChange={(e) => setForm({ ...form, value: e.target.value })}
+              InputLabelProps={isDate ? { shrink: true } : undefined}
+            />
+          )}
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3 }}>
           <Button onClick={() => setDialogOpen(false)} color="inherit">
