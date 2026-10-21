@@ -13,6 +13,7 @@ import AlertMessage from "@/components/AlertMessage";
 import StatusChip from "@/components/StatusChip";
 import PageHeader from "@/components/PageHeader";
 import DataTableCard from "@/components/DataTableCard";
+import { FILTER_SELECT_SX } from "@/lib/ui/filterSelectSx";
 
 export default function SubjectsPage() {
   const queryClient = useQueryClient();
@@ -144,7 +145,7 @@ export default function SubjectsPage() {
               label="Carrera"
               value={careerFilter}
               onChange={(e) => setCareerFilter(e.target.value)}
-              sx={{ minWidth: 200, "& .MuiInputBase-root": { borderRadius: 999 } }}
+              sx={FILTER_SELECT_SX(200)}
             >
               <MenuItem value="">Todas las carreras</MenuItem>
               {careers.map((c) => (
@@ -159,7 +160,7 @@ export default function SubjectsPage() {
               label="Periodo"
               value={periodFilter}
               onChange={(e) => setPeriodFilter(e.target.value)}
-              sx={{ minWidth: 150, "& .MuiInputBase-root": { borderRadius: 999 } }}
+              sx={FILTER_SELECT_SX(150)}
             >
               <MenuItem value="">Todos los periodos</MenuItem>
               {Array.from({ length: 9 }, (_, i) => i + 1).map((p) => (

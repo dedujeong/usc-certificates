@@ -17,6 +17,7 @@ import AlertMessage from "@/components/AlertMessage";
 import StatusChip from "@/components/StatusChip";
 import PageHeader from "@/components/PageHeader";
 import DataTableCard from "@/components/DataTableCard";
+import { FILTER_SELECT_SX } from "@/lib/ui/filterSelectSx";
 
 export default function StudentsPage() {
   const queryClient = useQueryClient();
@@ -146,7 +147,7 @@ export default function StudentsPage() {
             label="Carrera"
             value={careerFilter}
             onChange={(e) => setCareerFilter(e.target.value)}
-            sx={{ minWidth: 220, "& .MuiInputBase-root": { borderRadius: 999 } }}
+            sx={FILTER_SELECT_SX(220)}
           >
             <MenuItem value="">Todas las carreras</MenuItem>
             {careers.map((c) => (
