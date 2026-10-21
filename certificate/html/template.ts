@@ -327,7 +327,7 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     ${textEl(data.people[4].name, 110, 215, 10, { font: "timesNewRoman", align: "center", width: 90, whiteSpace: "normal" })}
 
     ${sectionedBoxEl(10, 230, 60, 95, 1.3, [13.6, 44.4, 8.0, 11.0, 7.9, 10.1])}
-    ${textEl("REGISTRADO EN EL DEPARTAMENTO DE SERVICIOS ESCOLARES", 40, 235.5, 8.5, { align: "center", width: 60, whiteSpace: "normal", anchorAtCenter: true })}
+    ${textEl("REGISTRADO EN EL DEPARTAMENTO DE SERVICIOS ESCOLARES", 40, 235.5, 8.5, { align: "center", width: 54, whiteSpace: "normal", anchorAtCenter: true })}
     ${textEl("CON Nº:", 12, 252, 10)}
     ${textEl("EN EL LIBRO:", 12, 262, 10)}
     ${textEl("FOJA:", 12, 272, 10)}
