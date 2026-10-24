@@ -76,8 +76,8 @@ switch ($Action) {
         Ensure-EnvFile
         Invoke-Compose @("up", "-d", "postgres")
         Wait-PostgresReady
-        Invoke-Compose @("run", "--rm", "migrate")
-        Invoke-Compose @("up", "-d", "app")
+        Invoke-Compose @("run", "--rm", "--build", "migrate")
+        Invoke-Compose @("up", "-d", "--build", "app")
         Write-Host ""
         Write-Host "Listo: http://localhost:3000"
         Write-Host "Si la base esta vacia, corre Sembrar.bat para cargar carreras/materias/firmantes."
