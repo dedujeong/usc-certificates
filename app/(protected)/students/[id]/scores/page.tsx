@@ -52,9 +52,16 @@ export default function StudentScoresPage({ params }: { params: Promise<{ id: st
     onError: (err) => setAlert({ message: err instanceof ApiError ? err.message : "Error al guardar", severity: "error" }),
   });
 
+  // `scores` is unfiltered history for this student — a career change
+  // leaves the previous career's scores in place (intentionally, for
+  // history), so the average shown here must only count scores for
+  // subjects of the currently active career, not every score ever entered.
+  const currentSubjectIds = new Set(subjects.map((s) => s.id));
+  const currentScores = scores.filter((s) => currentSubjectIds.has(s.subjectId));
+
   const average =
-    scores.length > 0
-      ? Math.floor((scores.reduce((sum, s) => sum + Number(s.value), 0) / scores.length) * 10) / 10
+    currentScores.length > 0
+      ? Math.floor((currentScores.reduce((sum, s) => sum + Number(s.value), 0) / currentScores.length) * 10) / 10
       : null;
 
   const columns: GridColDef[] = [

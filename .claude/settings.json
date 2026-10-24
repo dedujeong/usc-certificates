@@ -1,0 +1,11 @@
+{
+  "enabledPlugins": {
+    "gemba@gemba": true,
+    "gemba-code@gemba": true
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  }
+}

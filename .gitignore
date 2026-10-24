@@ -43,3 +43,7 @@ yarn-error.log*
 next-env.d.ts
 
 /app/generated/prisma
+.claude/worktrees/
+
+# local Windows launcher (usc.ps1): generated backups, never commit real data
+/backups/

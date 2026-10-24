@@ -46,6 +46,22 @@ docker exec -it <contenedor-postgres> psql -U usc -d postgres -c "CREATE DATABAS
 
 Las migraciones contra esa base se aplican automáticamente al correr `npm test` (ver `tests/globalSetup.ts`).
 
+## Levantar en Windows con doble clic
+
+Para correr el sistema completo (Postgres + app, ya conectados) en una PC Windows con [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y corriendo, sin usar una terminal:
+
+| Archivo | Qué hace |
+|---|---|
+| `Iniciar.bat` | Crea `.env` con un `JWT_SECRET` nuevo si no existe, aplica migraciones y levanta Postgres + la app en `http://localhost:3000` |
+| `Detener.bat` | Apaga los contenedores (los datos se conservan) |
+| `Reiniciar.bat` | `Detener` + `Iniciar` |
+| `Sembrar.bat` | Carga el catálogo (carreras, materias, firmantes, campos del certificado) y los usuarios de prueba — solo hace falta en una base vacía |
+| `Respaldar.bat` | Genera un respaldo de la base en `backups\usc_certificates_<fecha>.zip` y conserva solo los 10 más recientes |
+| `Restaurar.bat` | Lista los respaldos disponibles y restaura el que elijas (pide confirmación: sobreescribe la base actual) |
+| `Estado.bat` / `Logs.bat` | Para diagnosticar si algo no levanta |
+
+Todos son lanzadores de `usc.ps1` (PowerShell) — no modifican `docker-compose.yml` ni el `Dockerfile`, solo los orquestan.
+
 ## Despliegue con Docker (autohospedaje)
 
 ```bash
