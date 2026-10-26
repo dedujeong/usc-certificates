@@ -5,7 +5,7 @@
 * **R-01** Un usuario inicia sesión con email y contraseña verificada contra un hash bcrypt y recibe un JWT con su rol, válido 8 horas por defecto. [Functional] Source: Material
 * **R-02** Un superAdmin crea, lista, edita y desactiva cuentas de administrador. [Functional] Source: Material
 * **R-03** Un admin o superAdmin registra, lista, edita y desactiva alumnos, normalizando sus nombres a mayúsculas. [Functional] Source: Material
-* **R-04** El sistema asigna la matrícula de un alumno nuevo de forma atómica con una secuencia de Postgres, sin colisiones bajo registros concurrentes. [Business rule] Source: Material
+* **R-04** El sistema asigna la matrícula de un alumno nuevo de forma atómica con una secuencia de Postgres, sin colisiones bajo registros concurrentes; al registrar o editar un alumno también se puede escribir la matrícula a mano, siempre que no esté asignada a otro alumno, y la secuencia se adelanta para no repetirla. [Business rule] Source: Material
 * **R-05** Un admin o superAdmin registra, lista, edita y desactiva carreras y materias, asociando cada materia a una carrera y a un periodo. [Functional] Source: Material
 * **R-06** Un admin o superAdmin inscribe a un alumno en una carrera con fecha de inicio y de fin. [Functional] Source: Material
 * **R-07** Un alumno solo puede tener una inscripción activa a la vez; para inscribirlo a otra carrera primero se da de baja la inscripción activa. [Business rule] Source: Material

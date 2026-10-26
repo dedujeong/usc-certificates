@@ -20,6 +20,7 @@ export default function NewStudentPage() {
   });
 
   const [form, setForm] = useState({
+    tuition: "",
     firstName: "",
     paternalName: "",
     maternalName: "",
@@ -30,10 +31,13 @@ export default function NewStudentPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [alert, setAlert] = useState<{ message: string; severity: "success" | "error" } | null>(null);
 
+  const tuitionValid = form.tuition === "" || (/^\d+$/.test(form.tuition) && Number(form.tuition) >= 1 && Number(form.tuition) <= 2147483647);
+
   async function handleSubmit() {
     setIsSubmitting(true);
     try {
       const student = await studentsApi.create({
+        tuition: form.tuition ? Number(form.tuition) : undefined,
         firstName: form.firstName,
         paternalName: form.paternalName || undefined,
         maternalName: form.maternalName || undefined,
@@ -49,7 +53,15 @@ export default function NewStudentPage() {
       setAlert({ message: `Alumno registrado con matrícula ${student.tuition}`, severity: "success" });
       router.push("/students");
     } catch (err) {
-      setAlert({ message: err instanceof ApiError ? err.message : "Error al registrar", severity: "error" });
+      setAlert({
+        message:
+          err instanceof ApiError && err.status === 409 && form.tuition
+            ? `La matrícula ${form.tuition} ya está asignada a otro alumno`
+            : err instanceof ApiError
+              ? err.message
+              : "Error al registrar",
+        severity: "error",
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -61,12 +73,21 @@ export default function NewStudentPage() {
         <Typography variant="h4" sx={{ mb: 1 }}>
           Registrar alumno
         </Typography>
-        {nextTuition && (
-          <Typography variant="caption" color="text.secondary">
-            Siguiente matrícula sugerida: {nextTuition.tuition} (se asigna de forma atómica al guardar)
-          </Typography>
-        )}
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mt: 2 }}>
+          <TextField
+            label="Matrícula (opcional)"
+            value={form.tuition}
+            onChange={(e) => setForm({ ...form, tuition: e.target.value.trim() })}
+            error={!tuitionValid}
+            helperText={
+              !tuitionValid
+                ? "Solo números enteros positivos"
+                : nextTuition
+                  ? `Déjala vacía para asignar automáticamente la siguiente (${nextTuition.tuition})`
+                  : "Déjala vacía para asignar automáticamente la siguiente"
+            }
+            inputProps={{ inputMode: "numeric" }}
+          />
           <TextField label="Nombre(s)" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} required />
           <TextField
             label="Apellido paterno"
@@ -109,7 +130,7 @@ export default function NewStudentPage() {
               />
             </>
           )}
-          <Button variant="contained" onClick={handleSubmit} disabled={!form.firstName.trim() || isSubmitting}>
+          <Button variant="contained" onClick={handleSubmit} disabled={!form.firstName.trim() || !tuitionValid || isSubmitting}>
             {isSubmitting ? "Guardando..." : "Guardar"}
           </Button>
         </Box>

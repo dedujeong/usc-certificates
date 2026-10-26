@@ -2,10 +2,24 @@
 
 import { useMemo, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Box, Button, Container, IconButton, MenuItem, TextField, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  IconButton,
+  MenuItem,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import GradeIcon from "@mui/icons-material/Grade";
 import DescriptionIcon from "@mui/icons-material/Description";
+import EditIcon from "@mui/icons-material/Edit";
 import { GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
 import { studentsApi, Student } from "@/lib/api/students";
@@ -32,6 +46,8 @@ export default function StudentsPage() {
   const { data: careers = [] } = useQuery({ queryKey: queryKeys.careers, queryFn: careersApi.list });
   const [alert, setAlert] = useState<{ message: string; severity: "success" | "error" } | null>(null);
   const [careerFilter, setCareerFilter] = useState("");
+  const [editingTuition, setEditingTuition] = useState<Student | null>(null);
+  const [tuitionInput, setTuitionInput] = useState("");
 
   const activeCareerByStudentId = useMemo(() => {
     const map = new Map<number, { id: number; name: string }>();
@@ -53,6 +69,33 @@ export default function StudentsPage() {
       setAlert({ message: "Estado actualizado", severity: "success" });
     },
     onError: (err) => setAlert({ message: err instanceof ApiError ? err.message : "Error al actualizar estado", severity: "error" }),
+  });
+
+  function openEditTuition(student: Student) {
+    setEditingTuition(student);
+    setTuitionInput(String(student.tuition));
+  }
+
+  const newTuition = Number(tuitionInput);
+  const tuitionValid = /^\d+$/.test(tuitionInput) && newTuition >= 1 && newTuition <= 2147483647;
+
+  const tuitionMutation = useMutation({
+    mutationFn: () => studentsApi.update(editingTuition!.id, { tuition: newTuition }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.students });
+      setAlert({ message: `Matrícula actualizada a ${newTuition}`, severity: "success" });
+      setEditingTuition(null);
+    },
+    onError: (err) =>
+      setAlert({
+        message:
+          err instanceof ApiError && err.status === 409
+            ? `La matrícula ${newTuition} ya está asignada a otro alumno`
+            : err instanceof ApiError
+              ? err.message
+              : "Error al actualizar la matrícula",
+        severity: "error",
+      }),
   });
 
   const columns: GridColDef<Student>[] = [
@@ -93,12 +136,17 @@ export default function StudentsPage() {
     {
       field: "actions",
       headerName: "",
-      width: 220,
+      width: 260,
       sortable: false,
       align: "right",
       headerAlign: "right",
       renderCell: (params) => (
         <Box sx={{ display: "flex", gap: 0.5, alignItems: "center", justifyContent: "flex-end", width: "100%" }}>
+          <Tooltip title="Editar matrícula">
+            <IconButton size="small" onClick={() => openEditTuition(params.row)}>
+              <EditIcon fontSize="small" />
+            </IconButton>
+          </Tooltip>
           <Tooltip title="Calificaciones">
             <IconButton size="small" component={Link} href={`/students/${params.row.id}/scores`}>
               <GradeIcon fontSize="small" />
@@ -158,6 +206,40 @@ export default function StudentsPage() {
           </TextField>
         }
       />
+      <Dialog open={!!editingTuition} onClose={() => setEditingTuition(null)} fullWidth maxWidth="xs">
+        <DialogTitle sx={{ fontFamily: '"Fraunces", serif' }}>Editar matrícula</DialogTitle>
+        <DialogContent sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {editingTuition && (
+            <Typography variant="body2" color="text.secondary">
+              {[editingTuition.firstName, editingTuition.paternalName, editingTuition.maternalName].filter(Boolean).join(" ")} —
+              matrícula actual {editingTuition.tuition}. Sus calificaciones e inscripciones se conservan; los certificados
+              que se generen a partir de ahora mostrarán la nueva matrícula.
+            </Typography>
+          )}
+          <TextField
+            label="Nueva matrícula"
+            value={tuitionInput}
+            onChange={(e) => setTuitionInput(e.target.value.trim())}
+            error={tuitionInput !== "" && !tuitionValid}
+            helperText={tuitionInput !== "" && !tuitionValid ? "Solo números enteros positivos" : " "}
+            inputProps={{ inputMode: "numeric" }}
+            autoFocus
+          />
+        </DialogContent>
+        <DialogActions sx={{ px: 3, pb: 3 }}>
+          <Button onClick={() => setEditingTuition(null)} color="inherit">
+            Cancelar
+          </Button>
+          <Button
+            variant="contained"
+            disabled={!tuitionValid || newTuition === editingTuition?.tuition || tuitionMutation.isPending}
+            onClick={() => tuitionMutation.mutate()}
+          >
+            {tuitionMutation.isPending ? "Guardando..." : "Guardar"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       {alert && <AlertMessage open={!!alert} message={alert.message} severity={alert.severity} onClose={() => setAlert(null)} />}
     </Container>
   );
