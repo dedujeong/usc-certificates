@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { POST as createStudent, GET as listStudents } from "@/app/api/students/route";
 import { PUT as updateStudent } from "@/app/api/students/[id]/route";
+import { GET as nextTuition } from "@/app/api/students/next-tuition/route";
 import { resetDb, createTestUser, authHeaders } from "../helpers/db";
 import { req, noParams } from "../helpers/request";
 
@@ -53,17 +54,44 @@ describe("students", () => {
     expect(new Set(tuitions).size).toBe(CONCURRENCY);
   });
 
-  async function create(firstName: string) {
-    const res = await createStudent(
+  function post(body: unknown) {
+    return createStudent(
       req("http://localhost/api/students", {
         method: "POST",
         headers: authHeaders(token),
-        body: JSON.stringify({ firstName }),
+        body: JSON.stringify(body),
       }),
       noParams,
     );
+  }
+
+  async function create(firstName: string, tuition?: number) {
+    const res = await post({ firstName, tuition });
     return (await res.json()).data as { id: number; tuition: number };
   }
+
+  it("registers a student with a hand-typed tuition number", async () => {
+    const ana = await create("Ana", 777);
+    expect(ana.tuition).toBe(777);
+  });
+
+  it("rejects registering with a tuition number already in use", async () => {
+    await create("Ana", 777);
+    const res = await post({ firstName: "Luis", tuition: 777 });
+    expect(res.status).toBe(409);
+  });
+
+  it("keeps automatic registrations from colliding with a hand-typed tuition number", async () => {
+    await create("Ana", 10000);
+    const luis = await create("Luis");
+    expect(luis.tuition).toBe(10001);
+  });
+
+  it("previews the next tuition number from the sequence", async () => {
+    await create("Ana", 10005);
+    const res = await nextTuition(req("http://localhost/api/students/next-tuition", { headers: authHeaders(token) }), noParams);
+    expect((await res.json()).data.tuition).toBe(10006);
+  });
 
   function update(id: number, body: unknown) {
     return updateStudent(
