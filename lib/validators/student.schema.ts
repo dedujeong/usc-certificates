@@ -8,6 +8,8 @@ export const studentCreateSchema = z.object({
 
 export const studentUpdateSchema = studentCreateSchema.partial().extend({
   isActive: z.boolean().optional(),
+  // Upper bound is Postgres' INT max, the column type of students.tuition.
+  tuition: z.number().int().min(1).max(2147483647).optional(),
 });
 
 export type StudentCreateInput = z.infer<typeof studentCreateSchema>;

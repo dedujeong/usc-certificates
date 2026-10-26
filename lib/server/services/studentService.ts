@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { NotFoundError } from "@/lib/server/http";
+import { ConflictError, NotFoundError } from "@/lib/server/http";
 import { studentCreateSchema, studentUpdateSchema } from "@/lib/validators/student.schema";
 
 /**
@@ -34,9 +34,32 @@ export const studentService = {
     });
   },
 
+  /**
+   * Editing the tuition number must keep student_tuition_seq ahead of every
+   * tuition in use: if a student is moved to a number the sequence hasn't
+   * handed out yet, a later `create` would draw that same number and fail
+   * the unique constraint. So the sequence is advanced past the new value
+   * (never moved back) in the same transaction as the update.
+   */
   async update(id: number, input: unknown) {
     const data = studentUpdateSchema.parse(input);
-    return prisma.student.update({ where: { id }, data });
+    const { tuition } = data;
+    if (tuition === undefined) {
+      return prisma.student.update({ where: { id }, data });
+    }
+
+    return prisma.$transaction(async (tx) => {
+      const taken = await tx.student.findFirst({ where: { tuition, NOT: { id } } });
+      if (taken) throw new ConflictError(`Tuition ${tuition} is already assigned to another student`);
+
+      const student = await tx.student.update({ where: { id }, data });
+      await tx.$queryRaw(
+        Prisma.sql`SELECT setval('student_tuition_seq', ${tuition}::bigint)
+                   FROM student_tuition_seq
+                   WHERE ${tuition}::bigint >= CASE WHEN is_called THEN last_value + 1 ELSE last_value END`,
+      );
+      return student;
+    });
   },
 
   async softDelete(id: number) {

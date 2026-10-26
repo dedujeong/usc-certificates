@@ -15,7 +15,7 @@ export const studentsApi = {
   nextTuition: () => api.get<{ tuition: number }>("/api/students/next-tuition"),
   create: (data: { firstName: string; paternalName?: string; maternalName?: string }) =>
     api.post<Student>("/api/students", data),
-  update: (id: number, data: Partial<Pick<Student, "firstName" | "paternalName" | "maternalName" | "isActive">>) =>
+  update: (id: number, data: Partial<Pick<Student, "tuition" | "firstName" | "paternalName" | "maternalName" | "isActive">>) =>
     api.put<Student>(`/api/students/${id}`, data),
   softDelete: (id: number) => api.delete<Student>(`/api/students/${id}`),
 };
