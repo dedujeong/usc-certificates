@@ -7,7 +7,7 @@
 #>
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet("Up", "Down", "Restart", "Status", "Logs", "Seed", "Backup", "Restore")]
+    [ValidateSet("Up", "Down", "Restart", "Status", "Logs", "Seed", "Backup", "Restore", "Update")]
     [string]$Action,
 
     [string]$File
@@ -22,6 +22,10 @@ Set-Location $RepoRoot
 # acentos (nombres con tildes, "ñ", etc.) al respaldar o restaurar.
 $OutputEncoding = [System.Text.UTF8Encoding]::new($false)
 $Utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+
+# Repositorio oficial del que se actualiza la instalacion (rama de produccion).
+$RepoUrl = "https://github.com/dedujeong/usc-certificates.git"
+$RepoBranch = "main"
 
 $ComposeArgs = @("compose", "--profile", "prod")
 $BackupsDir = Join-Path $RepoRoot "backups"
@@ -70,7 +74,59 @@ function Wait-PostgresReady {
     throw "Postgres no quedo listo despues de 2 minutos."
 }
 
+function Assert-GitInstalled {
+    if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
+        throw "Git no esta instalado. Instalalo desde https://git-scm.com/download/win y vuelve a intentar."
+    }
+}
+
+function Invoke-Git {
+    param([string[]]$GitArgs)
+    & git @GitArgs
+    if ($LASTEXITCODE -ne 0) {
+        throw "git $($GitArgs -join ' ') fallo con codigo $LASTEXITCODE"
+    }
+}
+
 switch ($Action) {
+    "Update" {
+        Assert-GitInstalled
+        Assert-DockerRunning
+
+        # Instalacion descargada como .zip (sin .git): se enlaza al repositorio
+        # oficial conservando .env y backups\ (no estan versionados).
+        if (-not (Test-Path (Join-Path $RepoRoot ".git"))) {
+            Write-Host "Esta carpeta no estaba enlazada a Git; enlazando con $RepoUrl ..."
+            Invoke-Git @("init", "-b", $RepoBranch)
+            Invoke-Git @("remote", "add", "origin", $RepoUrl)
+            Invoke-Git @("fetch", "origin", $RepoBranch)
+            Invoke-Git @("reset", "--hard", "origin/$RepoBranch")
+            Invoke-Git @("branch", "--set-upstream-to=origin/$RepoBranch", $RepoBranch)
+        }
+        else {
+            # Si el origin apunta a otro lado (instalaciones anteriores), se corrige.
+            $current = (& git remote get-url origin 2>$null)
+            if ($LASTEXITCODE -ne 0) {
+                Invoke-Git @("remote", "add", "origin", $RepoUrl)
+            }
+            elseif ($current -ne $RepoUrl) {
+                Write-Host "Actualizando origin: $current -> $RepoUrl"
+                Invoke-Git @("remote", "set-url", "origin", $RepoUrl)
+            }
+
+            $dirty = (& git status --porcelain --untracked-files=no)
+            if ($dirty) {
+                throw "Hay archivos modificados localmente; no se actualiza para no perderlos:`n$($dirty -join "`n")"
+            }
+            Invoke-Git @("fetch", "origin", $RepoBranch)
+            Invoke-Git @("checkout", $RepoBranch)
+            Invoke-Git @("merge", "--ff-only", "origin/$RepoBranch")
+        }
+
+        Write-Host "Respaldando la base antes de actualizar..."
+        & $PSCommandPath -Action Backup
+        & $PSCommandPath -Action Up
+    }
     "Up" {
         Assert-DockerRunning
         Ensure-EnvFile

@@ -53,6 +53,7 @@ Para correr el sistema completo (Postgres + app, ya conectados) en una PC Window
 | Archivo | Qué hace |
 |---|---|
 | `Iniciar.bat` | Crea `.env` con un `JWT_SECRET` nuevo si no existe, aplica migraciones y levanta Postgres + la app en `http://localhost:3000` |
+| `Actualizar.bat` | Descarga la última versión desde `github.com/dedujeong/usc-certificates` (rama `main`), respalda la base, aplica migraciones y reconstruye la app. Si la carpeta se descargó como .zip, la enlaza al repositorio automáticamente. Requiere [Git](https://git-scm.com/download/win); se niega a actualizar si hay archivos versionados modificados a mano |
 | `Detener.bat` | Apaga los contenedores (los datos se conservan) |
 | `Reiniciar.bat` | `Detener` + `Iniciar` |
 | `Sembrar.bat` | Carga el catálogo (carreras, materias, firmantes, campos del certificado) y los usuarios de prueba — solo hace falta en una base vacía |
