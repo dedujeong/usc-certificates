@@ -16,7 +16,7 @@ import { loadCertificateAssets } from "./assets";
  * sizes — both units CSS supports natively, so the numbers below are the
  * *same* numbers the jsPDF version used), with two real quality upgrades:
  *  - The 3 legal paragraphs (LEGAL_TOP/LEGAL_1/LEGAL_2) use real CSS
- *    `text-align: justify` + `hyphens: auto` with `lang="es"`, instead of
+ *    `text-align: justify` + `hyphens: none` (justified, never splitting words), instead of
  *    the old hand-rolled word-wrap/justify engine. A real browser's text
  *    shaper also kerns and anti-aliases far better than jsPDF's glyph
  *    rendering.
@@ -329,7 +329,7 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
 
   const page2Legal = `
     ${boxEl(110, 74, 96, 50, 1.3)}
-    <div style="position:absolute; left:111.5mm; top:78mm; width:93mm; font-family:'${FONT_FAMILY.arial}'; font-size:10.7pt; text-align:justify; hyphens:auto;">${markupToHtml(processedLegalTop)}</div>
+    <div style="position:absolute; left:111.5mm; top:78mm; width:93mm; font-family:'${FONT_FAMILY.arial}'; font-size:10.7pt; text-align:justify; hyphens:none;">${markupToHtml(processedLegalTop)}</div>
 
     ${textEl(data.people[3].charge, 55, 190, 9, { bold: true, align: "center", width: 60, whiteSpace: "normal", anchorAtCenter: true })}
     ${lineEl(10, 210, 90)}
@@ -355,8 +355,8 @@ export async function buildCertificateHtml(data: CertificateData): Promise<strin
     ${textEl(data.people[5].name, 12, 320, 8, { font: "timesNewRoman", align: "center", width: 56 })}
 
     <div id="legal-paragraphs" style="position:absolute; left:110mm; top:235mm; width:95mm; font-size:10pt;">
-      <p style="margin:0 0 4.5mm 0; text-align:justify; hyphens:auto; font-family:'${resolveLegalFont(data.legal1FontFamily)}';${data.legal1LineHeight ? ` line-height:${data.legal1LineHeight};` : ""}">${markupToHtml(data.legal1)}</p>
-      <p style="margin:0; text-align:justify; hyphens:auto; font-family:'${resolveLegalFont(data.legal2FontFamily)}';${data.legal2LineHeight ? ` line-height:${data.legal2LineHeight};` : ""}">${markupToHtml(data.legal2)}</p>
+      <p style="margin:0 0 4.5mm 0; text-align:justify; hyphens:none; font-family:'${resolveLegalFont(data.legal1FontFamily)}';${data.legal1LineHeight ? ` line-height:${data.legal1LineHeight};` : ""}">${markupToHtml(data.legal1)}</p>
+      <p style="margin:0; text-align:justify; hyphens:none; font-family:'${resolveLegalFont(data.legal2FontFamily)}';${data.legal2LineHeight ? ` line-height:${data.legal2LineHeight};` : ""}">${markupToHtml(data.legal2)}</p>
     </div>
 
     <div id="closing-signatures" style="position:absolute; left:110mm; top:285mm; width:95mm; font-family:'${FONT_FAMILY.timesNewRoman}'; font-size:10pt;">

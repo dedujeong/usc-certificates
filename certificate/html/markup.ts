@@ -2,7 +2,7 @@
 // (see components/certificate/LegalTextField.tsx) into real HTML. Unlike
 // the old jsPDF-based renderer (certificate/render/markup.ts, now removed),
 // this doesn't need a hand-rolled word-wrap/justify engine — the browser's
-// own text layout (text-align: justify + hyphens: auto) handles that, which
+// own text layout (text-align: justify + hyphens: none) handles that, which
 // is the actual typography improvement over the previous implementation.
 export function markupToHtml(text: string): string {
   const escaped = escapeHtml(text);
